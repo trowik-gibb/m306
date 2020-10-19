@@ -5,12 +5,14 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { PageThreeComponent } from './page-three/page-three.component';
 
+import { AuthGuardService as AuthGuard } from "./auth/auth-guard.service";
+
 const routes: Routes = [
   { path: 'home', component: StartPageComponent },
-  { path: '1', component: PageOneComponent },
-  { path: '2', component: PageTwoComponent},
-  { path: '3', component: PageThreeComponent},
-  { path: '**', component: PageOneComponent }
+  { path: '1', component: PageOneComponent, canActivate: [AuthGuard]},
+  { path: '2', component: PageTwoComponent, canActivate: [AuthGuard]},
+  { path: '3', component: PageThreeComponent, canActivate: [AuthGuard]},
+  { path: '**', component: PageOneComponent, canActivate: [AuthGuard]}
 ];
 
 @NgModule({
