@@ -11,6 +11,7 @@ import { PageTwoComponent } from './page-two/page-two.component';
 import { PageThreeComponent } from './page-three/page-three.component';
 import { AuthService } from './auth/auth.service';
 import { AuthGuardService } from './auth/auth-guard.service';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { AuthGuardService } from './auth/auth-guard.service';
     PageOneComponent,
     PageTwoComponent,
     PageThreeComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
