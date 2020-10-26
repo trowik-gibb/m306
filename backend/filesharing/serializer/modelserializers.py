@@ -13,3 +13,5 @@ class FileSerializer(serializers.Serializer):
     uploaded_at = serializers.DateField()
     public = serializers.BooleanField()
     price = serializers.FloatField
+
+

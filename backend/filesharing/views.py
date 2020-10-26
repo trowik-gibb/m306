@@ -5,21 +5,29 @@ from django.http import HttpResponse
 from .models import File
 from .controller.RegistrationController.RegistrationController import RegistrationController
 from .controller.PersonController.PersonController import PersonController
+from .controller.AuthenticationController.AuthenticationController import AuthenticationController
+from .controller.FileController.FileController import FileController
+from .serializer.modelserializers import PersonSerializer
+from rest_framework import serializers
 
 
-# Create your views here.
+# Controllers
 registerController = RegistrationController()
 personController = PersonController()
+authenticationController = AuthenticationController()
+fileController = FileController()
+
 
 # --------------------------#Personapi#----------------------------
 def register(request):
     email = request.POST.get('email')
     username = request.POST.get('username')
     password = request.POST.get('password')
-    if registerController.checkIfEmailExists(email):
-        user = User.objects.create_user(username, email, password)
-        user.save()
-        response = HttpResponse(user)
+    if not registerController.checkIfEmailExists(email):
+        user = personController.newPerson(email, username, password)
+        serializer = PersonSerializer(user)
+        print('serialized data:', serializer.data)
+        response = HttpResponse(serializer.data)
         response['Content-Type'] = 'application/json'
         response['Access-Control-Allow-Origin'] = '*'
         return response
@@ -27,11 +35,10 @@ def register(request):
         return HttpResponse('login failed')
 
 
-
 def authenticate(request, response):
     email = request.POST.get('email')
     password = request.POST.get('password')
-    user = authenticate(email=email, password=password)
+    user = authenticationController.checkLogin(email, password)
     if user is not None:
         request.session['user'] = user.id
         login(request, user)
@@ -39,8 +46,18 @@ def authenticate(request, response):
         return response
 
 
+def displayPersonByEmail(request):
+    email = request.POST.get('email')
+    user = personController.getPersonByEmail(email)
+    serializer = personController(user)
+    response = HttpResponse(serializer.data)
+    response['Content-Type'] = 'application/json'
+    response['Access-Control-Allow-Origin'] = '*'
+    return response;
+
 
 # ------------------------------#Fileapi#-------------------------
+
 def newFile(request):
     if request.method == 'POST':
         file = request.FILES['file']
@@ -53,9 +70,12 @@ def newFile(request):
 
 
 def displayAllFiles(request):
-    files = []
-    for file in File.objects.all():
-        print(file.name)
-    files = File.objects.all()
+    files = fileController.getAllFiles()
+    json = serializers.serialize('json', files)
+    print(json)
     response = HttpResponse(files)
+    response['Content-Type'] = 'application/json'
+    response['Access-Control-Allow-Origin'] = '*'
     return response
+
+

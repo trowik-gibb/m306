@@ -23,7 +23,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     url('/register', include(('filesharing.urls', 'filesharing'), namespace='filesharing')),
     url('/login', include(('filesharing.urls', 'filesharing'), namespace='filesharing')),
-    url('/newfile', include(('filesharing.urls', 'filesharing'), namespace='filesharing'))
+    url('/newfile', include(('filesharing.urls', 'filesharing'), namespace='filesharing')),
+    url('/files', include(('filesharing.urls', 'filesharing'), namespace='filesharing'))
 
 
 
