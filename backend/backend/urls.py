@@ -15,7 +15,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf.urls import include, url
+import backend.filesharing.urls
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    url('/register', include(('filesharing.urls', 'filesharing'), namespace='filesharing')),
+    url('/login', include(('filesharing.urls', 'filesharing'), namespace='filesharing')),
+    url('/newfile', include(('filesharing.urls', 'filesharing'), namespace='filesharing'))
+
+
+
 ]
