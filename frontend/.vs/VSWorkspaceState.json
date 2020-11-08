@@ -3,10 +3,14 @@
     "",
     "\\src",
     "\\src\\app",
+    "\\src\\app\\auth",
+    "\\src\\app\\auth\\models",
     "\\src\\app\\components",
     "\\src\\app\\components\\file",
-    "\\src\\app\\models"
+    "\\src\\app\\models",
+    "\\src\\app\\signup",
+    "\\src\\environments"
   ],
-  "SelectedNode": "\\src\\app\\components\\file\\file.component.css",
+  "SelectedNode": "\\src\\styles.css",
   "PreviewInSolutionExplorer": false
 }
