@@ -26,11 +26,13 @@ export class SignupComponent{
 
   signup() {
     if (this.form.value.password === this.form.value.passwordRep) {
-      this.authService.signup(this.form.value).subscribe((data) =>  console.log(data));
+      this.authService.signup(this.form.value).subscribe((data: SignUpData) => {
+        this.authService.setToken(data.username);
+        this.router.navigate(['home']);
+      });
     }
     else {
       console.log("passwords don't match");
     }
-        //this.router.navigate(['home']);
     }
 }
