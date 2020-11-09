@@ -17,7 +17,11 @@ export class AuthService {
     }
 
   public signup(signUpData: SignUpData) {
-    return this.http.post(`${BACKEND_PATH}/register/`, signUpData);
+    const formData = new FormData();
+    formData.append("email", signUpData.email);
+    formData.append("username", signUpData.username);
+    formData.append("password", signUpData.password);
+    return this.http.post(`${BACKEND_PATH}/register/`, formData);
         console.log(signUpData);
         //this.http.put('path', signUpData)
     }
