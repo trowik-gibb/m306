@@ -3,45 +3,8 @@
     <h1 style="width: 700px;">Datei hochladen{{title}}</h1>
   </div>
   <form  [formGroup] = "uploadForm" (ngSubmit)="onSubmit()" >
-
-    <div class="input-group mb-3">
-      <div class="custom-file">
-        <input type="file" name="profile" class="custom-file-input" id="inputGroupFile01" (change)="onFileSelect($event)" >
-        <label class="custom-file-label" for="inputGroupFile01">Datei auswählen</label>
-      </div>
-    </div>
-
-
-    <div class="form-group">
-      <label for="description">Bezeichnung</label>
-      <input type="text" class="form-control" id="description" aria-describedby="emailHelp"
-             placeholder="Dateiname eingeben">
-    </div>
-
-    <div class="form-group">
-      <label for="price">Preis</label>
-      <input type="number" class="form-control" id="price" aria-describedby="emailHelp"
-             placeholder="Preis eingeben">
-    </div>
-
-    <div class="form-check">
-      <input type="checkbox" class="form-check-input" id="checkBoxPriv">
-      <label class="form-check-label" for="checkBoxPriv">Privat</label>
-    </div>
-    <div class="form-check">
-      <input type="checkbox" class="form-check-input" id="checkBoxOef">
-      <label class="form-check-label" for="checkBoxOef">Öffentlich</label>
-    </div>
-
-    <div class="text-right">
-      <button id="reset" type="reset" class="btn btn-secondary mb-3 mr-2"
-              (click)="navigateBack()">Zurück
-
-      </button>
-      <button id="save" class="btn btn-primary btn-animated mb-3" type="submit" (click)="navigateBack()"
-              >
-        Hochladen
-      </button>
-    </div>
+      <label>Datei auswählen</label>
+    <input type="file" (input)="onFileSelect($event)">
+    <button type="submit">Datei hochladen</button>
   </form>
 </div>

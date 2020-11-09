@@ -4,6 +4,7 @@ import {Location} from '@angular/common';
 import {HttpErrorResponse} from '@angular/common/http';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import {FileModel} from "../models/file.interface";
 
 
 @Component({
@@ -17,9 +18,10 @@ export class CreateFileuploadComponent implements OnInit {
   @Input() subtitle: string;
   @Input() confirmationText: string;
   @Input() btnConfirmLabel: string;
+  public file: FileModel;
 
   activeModal: NgbActiveModal;
-  SERVER_URL = 'http://localhost:3000/upload';
+  SERVER_URL = 'http://localhost:8000/newfile/';
   uploadForm: FormGroup;
 
   constructor(activeModal: NgbActiveModal,
@@ -55,8 +57,9 @@ export class CreateFileuploadComponent implements OnInit {
 
   onSubmit(): void {
     const formData = new FormData();
-    formData.append('file', this.uploadForm.get('profile').value);
-
+    formData.append('file', this.file);
+    formData.append('owner', '1');
+    formData.append('type', '1');
     this.httpClient.post<any>(this.SERVER_URL, formData).subscribe(
       (res) => console.log(res),
       (err) => console.log(err)
@@ -65,8 +68,8 @@ export class CreateFileuploadComponent implements OnInit {
 
   onFileSelect(event): void {
     if (event.target.files.length > 0) {
-      const file = event.target.files[0];
-      this.uploadForm.get('profile').setValue(file);
+      this.file = event.target.files[0];
+      console.log(this.file);
     }
   }
 }
