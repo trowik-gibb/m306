@@ -1,4 +1,4 @@
-import { CreateModalComponent } from './../create-modal/create-modal.component';
+import { CreateFileuploadComponent } from '../create-fileuploud/create-fileupload.component';
 import { NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
@@ -17,9 +17,8 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  loadModal(){
-    const modalRef = this.modal.open(CreateModalComponent);
-    modalRef.componentInstance.titel = 'test';
+  loadModal(): void{
+    this.modal.open(CreateFileuploadComponent);
   }
 
 

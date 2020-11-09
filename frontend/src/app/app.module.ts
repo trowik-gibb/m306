@@ -11,8 +11,10 @@ import { PageThreeComponent } from './page-three/page-three.component';
 import { AuthService } from './auth/auth.service';
 import { AuthGuardService } from './auth/auth-guard.service';
 import { LoginComponent } from './login/login.component';
-import { CreateModalComponent } from './create-modal/create-modal.component';
-import {FormsModule} from "@angular/forms";
+import { CreateFileuploadComponent } from './create-fileuploud/create-fileupload.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { CreateGroupComponent } from './create-group/create-group.component';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -22,17 +24,20 @@ import {FormsModule} from "@angular/forms";
     PageTwoComponent,
     PageThreeComponent,
     LoginComponent,
-    CreateModalComponent
+    CreateFileuploadComponent,
+    CreateGroupComponent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        NgbPaginationModule,
-        NgbAlertModule,
-        NgbModule,
-        FormsModule
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    NgbPaginationModule,
+    NgbAlertModule,
+    NgbModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule
 
-    ],
+  ],
   providers: [
     AuthService,
     AuthGuardService

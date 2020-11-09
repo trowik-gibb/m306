@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {CreateFileuploadComponent} from "../create-fileuploud/create-fileupload.component";
+import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
   selector: 'app-page-three',
@@ -7,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PageThreeComponent implements OnInit {
 
-  constructor() { }
+  constructor(public modal: NgbModal) { }
 
   ngOnInit(): void {
+  }
+  loadModal(): void{
+    this.modal.open(CreateFileuploadComponent);
   }
 
 }
