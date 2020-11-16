@@ -1,16 +1,22 @@
 <div class="container">
   <body class="text-center">
-    <p>{{ form.value | json }}</p>
     <form [formGroup]="form" class="form-signup" (ngSubmit)="signup()">
       <h1 class="h3 mb-3 font-weight-normal">Please sign up</h1>
       <label for="inputUsername" class="sr-only">Username</label>
       <input formControlName="username" type="text" id="inputUsername" class="form-control m-2" placeholder="Username" required autofocus="">
+      <p class="error" *ngIf="form.controls.username.errors?.required && form.controls.username.dirty">The username is required.</p>
       <label for="inputEmail" class="sr-only">Email address</label>
       <input formControlName="email" type="email" id="inputEmail" class="form-control m-2" placeholder="Email address" required autofocus="">
+      <p class="error" *ngIf="form.controls.email.errors?.required && form.controls.email.dirty">The email is required.</p>
+      <p class="error" *ngIf="!form.controls.email.errors?.required && form.controls.email.errors?.email && form.controls.email.dirty">Please enter a valid email.</p>
       <label for="inputPassword" class="sr-only">Password</label>
       <input formControlName="password" type="password" id="inputPassword" class="form-control m-2" placeholder="Password" required>
+      <p class="error" *ngIf="form.controls.password.errors?.required && form.controls.password.dirty">The password is required.</p>
+      <p class="error" *ngIf="!form.controls.password.errors?.required && form.controls.password.errors?.minlength && form.controls.password.dirty">The password needs to be at least 8 characters long.</p>
       <label for="inputPasswordRepeat" class="sr-only">Repeat Password</label>
       <input formControlName="passwordRep" type="password" id="inputPasswordRepeat" class="form-control m-2" placeholder="Repeat Password" required>
+      <p class="error" *ngIf="form.controls.passwordRep.errors?.required && form.controls.passwordRep.dirty">Please repeat the password.</p>
+      <p class="error" *ngIf="!form.controls.passwordRep.errors?.required && form.controls.passwordRep.errors?.noMatch && form.controls.passwordRep.dirty">The passwords don't match.</p>
       <button class="btn btn-lg btn-primary btn-block m-2" type="submit">Sign up</button>
       <a routerLink="/login">Already have an account? Log in instead...</a>
     </form>

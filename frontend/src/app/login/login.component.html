@@ -1,12 +1,13 @@
 <div class="container">
   <body class="text-center">
-    <p>{{ form.value | json }}</p>
     <form [formGroup]="form" class="form-login" (ngSubmit)="login()">
       <h1 class="h3 mb-3 font-weight-normal">Please log in</h1>
       <label for="inputUsername" class="sr-only">Username</label>
       <input formControlName="username" type="text" id="inputUsername" class="form-control m-2" placeholder="Username" required autofocus="">
+      <p class="error" *ngIf="form.controls.username.errors?.required && form.controls.username.dirty">The username is required</p>
       <label for="inputPassword" class="sr-only">Password</label>
       <input formControlName="password" type="password" id="inputPassword" class="form-control m-2" placeholder="Password" required>
+      <p class="error" *ngIf="form.controls.password.errors?.required && form.controls.password.dirty">The password is required</p>
       <button class="btn btn-lg btn-primary btn-block m-2" type="submit">Log in</button>
       <a routerLink="/signup">Don't have an account? Sign up instead...</a>
     </form>

@@ -1,32 +1,37 @@
 import { Component } from "@angular/core";
 import { Router } from "@angular/router";
-import { FormBuilder } from "@angular/forms";
+import { FormBuilder, Validators } from "@angular/forms";
 
 import { LoginData } from "../auth/models/login-data.interface";
 import { AuthService } from "../auth/auth.service";
 
 @Component({
-    selector:"login",
-    templateUrl: "login.component.html",
-    styleUrls: ["login.component.css"]
+  selector: "login",
+  templateUrl: "login.component.html",
+  styleUrls: ["login.component.css"]
 })
-export class LoginComponent{
+export class LoginComponent {
 
-    form = this.fb.group({
-      username: this.fb.control(""),
-      password: this.fb.control("")
-    })    
+  form = this.fb.group({
+    username: this.fb.control("", [Validators.required]),
+    password: this.fb.control("", [Validators.required])
+  })
 
-    constructor(
-      private router: Router,
-      private fb: FormBuilder,
-      private authService: AuthService){}
+  constructor(
+    private router: Router,
+    private fb: FormBuilder,
+    private authService: AuthService) { }
 
   login() {
-    this.authService.login(this.form.value).subscribe((data: LoginData) => {
-      this.authService.setToken(data.username);
-      this.router.navigate(['home']);
+    (<any>Object).values(this.form.controls).forEach(control => {
+      control.markAsDirty();
     });
+    if (this.form.valid) {
+      this.authService.login(this.form.value).subscribe((data: LoginData) => {
+        this.authService.setToken(data.username);
+        this.router.navigate(['home']);
+      });
       this.router.navigate(['home']);
-   }
+    }
+  }
 }
