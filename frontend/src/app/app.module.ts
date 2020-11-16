@@ -1,8 +1,8 @@
 import { HomeComponent } from './home/home.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from "@angular/forms";
-import { HttpClientModule } from "@angular/common/http";
+import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -16,9 +16,9 @@ import { AuthGuardService } from './auth/auth-guard.service';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { CreateFileuploadComponent } from './create-fileuploud/create-fileupload.component';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {FormsModule} from '@angular/forms';
 import { CreateGroupComponent } from './create-group/create-group.component';
-import {HttpClient, HttpClientModule} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -28,7 +28,7 @@ import {HttpClient, HttpClientModule} from '@angular/common/http';
     PageTwoComponent,
     PageThreeComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
     LoginComponent,
     CreateFileuploadComponent,
     CreateGroupComponent
@@ -41,7 +41,7 @@ import {HttpClient, HttpClientModule} from '@angular/common/http';
     NgbModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
     NgbModule,
     ReactiveFormsModule,
     HttpClientModule
