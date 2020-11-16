@@ -35,4 +35,8 @@ export class AuthService {
   public setToken(username: string) {
     localStorage.setItem("login_token", username);
   }
+
+  public getUsername(): string {
+    return localStorage.getItem("login_token")
+  }
 }

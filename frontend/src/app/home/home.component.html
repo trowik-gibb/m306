@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="card">
+  <div class="card m-2">
     <div class="card-header">
       Home Home Home
     </div>
@@ -9,5 +9,5 @@
       <a (click)="loadModalFileUpload()" class="btn btn-primary">Open Modal</a>
     </div>
   </div>
-
+  <file-element *ngFor="let file of files" [file]="file"></file-element>
 </div>

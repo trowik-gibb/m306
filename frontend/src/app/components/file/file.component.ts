@@ -1,13 +1,22 @@
 import { Component, Input } from "@angular/core";
 
-import { File } from "../../models/file.interface";
+import { FileModel } from "../../models/file.interface";
+import { AuthService } from "../../auth/auth.service";
 
 @Component({
-  selector: "file",
+  selector: "file-element",
   templateUrl: "file.component.html",
   styleUrls: ["file.component.css"]
 })
 export class FileComponent {
   @Input()
-  file: File;
+  file: FileModel;
+
+  constructor(
+    public authService: AuthService) {
+  }
+
+  isOwn(owner: string) {
+    return this.authService.getUsername() === owner
+  }
 }

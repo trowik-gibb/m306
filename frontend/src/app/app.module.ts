@@ -18,7 +18,8 @@ import { SignupComponent } from './signup/signup.component';
 import { CreateFileuploadComponent } from './create-fileuploud/create-fileupload.component';
 import {FormsModule} from '@angular/forms';
 import { CreateGroupComponent } from './create-group/create-group.component';
-import {HttpClient} from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
+import { FileComponent } from "./components/file/file.component";
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import {HttpClient} from '@angular/common/http';
     SignupComponent,
     LoginComponent,
     CreateFileuploadComponent,
-    CreateGroupComponent
+    CreateGroupComponent,
+    FileComponent
   ],
   imports: [
     BrowserModule,
