@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from "@angular/router";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -10,10 +10,9 @@ export class AppComponent {
   title = 'testapp';
 
   constructor(private router: Router){
-    
   }
 
-  logout() {
+  logout(): void {
     localStorage.removeItem('login_token');
     this.router.navigate(['login']);
   }

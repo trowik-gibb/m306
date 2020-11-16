@@ -1,1 +1,25 @@
-<p>create-group works!</p>
+<div class="container">
+  <div class="p-5">
+    <h1 style="width: 700px;">Neue Gruppe erstellen</h1>
+  </div>
+  <form [formGroup]="formGroupForm" (ngSubmit)="onSubmit()">
+
+    <div class="form-group">
+      <label for="description">Grupenname</label>
+      <input type="text" class="form-control" id="description" aria-describedby="emailHelp"
+             placeholder="Gruppenname eingeben">
+    </div>
+
+    <div class="text-right">
+      <button id="reset" type="reset" class="btn btn-secondary mb-3 mr-2"
+              (click)="navigateBack()">Zurück
+
+      </button>
+      <button id="save" class="btn btn-primary btn-animated mb-3" type="submit" (click)="this.activeModal.close()"
+      >
+        Erstellen
+      </button>
+
+    </div>
+  </form>
+</div>

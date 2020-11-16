@@ -4,8 +4,7 @@ import {Location} from '@angular/common';
 import {HttpErrorResponse} from '@angular/common/http';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import {FileModel} from "../models/file.interface";
-
+import {FileModel} from '../models/file.interface';
 
 @Component({
   selector: 'app-create-modal',
@@ -14,10 +13,10 @@ import {FileModel} from "../models/file.interface";
 })
 export class CreateFileuploadComponent implements OnInit {
 
-  @Input() title: string;
-  @Input() subtitle: string;
-  @Input() confirmationText: string;
-  @Input() btnConfirmLabel: string;
+  // @Input() title: string;
+  // @Input() subtitle: string;
+  // @Input() confirmationText: string;
+  // @Input() btnConfirmLabel: string;
   public file: FileModel;
 
   activeModal: NgbActiveModal;
