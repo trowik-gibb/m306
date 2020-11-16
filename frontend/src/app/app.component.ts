@@ -11,11 +11,11 @@ export class AppComponent {
   title = 'testapp';
 
   constructor(private router: Router,
-    private authService: AuthService
+    public authService: AuthService
   ) {
   }
 
-  logout() {
+  logout(): void {
     localStorage.removeItem('login_token');
     this.router.navigate(['login']);
   }
