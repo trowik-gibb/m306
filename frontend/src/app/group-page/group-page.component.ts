@@ -5,10 +5,10 @@ import {CreateGroupComponent} from "../create-group/create-group.component";
 
 @Component({
   selector: 'app-page-three',
-  templateUrl: './page-three.component.html',
-  styleUrls: ['./page-three.component.css']
+  templateUrl: './group-page.component.html',
+  styleUrls: ['./group-page.component.css']
 })
-export class PageThreeComponent implements OnInit {
+export class GroupPageComponent implements OnInit {
 
   constructor(public modal2: NgbModal) { }
 
