@@ -79,9 +79,11 @@ export class CreateFileuploadComponent implements OnInit {
   }
 
   public setPublic(): void {
-   this.state = true;
-   console.log(this.state);
-
+   if (!this.state){
+      this.state = true;
+   }else{
+     this.state = false;
+   }
   }
 
   public setPrivate(): void {
