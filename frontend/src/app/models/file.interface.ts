@@ -4,4 +4,5 @@ export interface FileModel extends File{
   owner: string;
   size: number;
   prize: number;
+  public: boolean;
 }

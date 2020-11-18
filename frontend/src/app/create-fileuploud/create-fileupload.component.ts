@@ -2,8 +2,8 @@ import {Component, Inject, Input, OnInit} from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import {Location} from '@angular/common';
 import {HttpErrorResponse} from '@angular/common/http';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
+import {FormBuilder, FormGroup} from '@angular/forms';
+import {HttpClient} from '@angular/common/http';
 import {FileModel} from '../models/file.interface';
 import {AuthService} from "../auth/auth.service";
 
@@ -21,6 +21,10 @@ export class CreateFileuploadComponent implements OnInit {
   public file: FileModel;
   public activeModal: NgbActiveModal;
   public authService: AuthService;
+  public state = false;
+  public price: number;
+
+  activeModal: NgbActiveModal;
   SERVER_URL = 'http://localhost:8000/newfile/';
   uploadForm: FormGroup;
 
@@ -28,7 +32,7 @@ export class CreateFileuploadComponent implements OnInit {
               private location: Location,
               private formBuilder: FormBuilder,
               private httpClient: HttpClient
-             ) {
+  ) {
     this.activeModal = activeModal;
     this.authService = authService;
   }
@@ -36,30 +40,35 @@ export class CreateFileuploadComponent implements OnInit {
 
   ngOnInit(): void {
     this.uploadForm = this.formBuilder.group({
-      profile: ['']
+      profile: [''],
+      name: ['name'],
+      price: [0.0]
     });
   }
 
 
   handleSave(): void {
-/*
-      this.parkingLotService.createParkingLot(submittedParkingLot).subscribe(
-        () => {
-          this.toastrService.success(this.translateService.instant('parking-lot.form.toaster.created'));
-        }, (response: HttpErrorResponse) => this.errors = response.error!.validationErrors as ValidationError[]
-      );
- */
-    }
+    /*
+          this.parkingLotService.createParkingLot(submittedParkingLot).subscribe(
+            () => {
+              this.toastrService.success(this.translateService.instant('parking-lot.form.toaster.created'));
+            }, (response: HttpErrorResponse) => this.errors = response.error!.validationErrors as ValidationError[]
+          );
+     */
+  }
 
   navigateBack(): void {
     this.activeModal.close();
-     // this.location.back();
+    // this.location.back();
   }
 
-  onSubmit(): void {
+  onSubmit(fileData: any): void {
+    console.log(fileData.name);
+    this.file.prize = fileData.price;
     const formData = new FormData();
     formData.append('file', this.file);
     formData.append('owner', String(this.authService.getAuthenticatedUser()));
+    formData.append('state', this.state ? '1' : '0');
     this.httpClient.post<any>(this.SERVER_URL, formData).subscribe(
       (res) => console.log(res),
       (err) => console.log(err)
@@ -71,5 +80,13 @@ export class CreateFileuploadComponent implements OnInit {
       this.file = event.target.files[0];
       console.log(this.file);
     }
+  }
+
+  public setPublic(): void {
+   if (!this.state){
+      this.state = true;
+   }else{
+     this.state = false;
+   }
   }
 }

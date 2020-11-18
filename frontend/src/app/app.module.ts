@@ -10,7 +10,7 @@ import { StartPageComponent } from './start-page/start-page.component';
 import {NgbPaginationModule, NgbAlertModule} from '@ng-bootstrap/ng-bootstrap';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { PageTwoComponent } from './page-two/page-two.component';
-import { PageThreeComponent } from './page-three/page-three.component';
+import { GroupPageComponent } from './group-page/group-page.component';
 import { AuthService } from './auth/auth.service';
 import { AuthGuardService } from './auth/auth-guard.service';
 import { LoginComponent } from './login/login.component';
@@ -28,7 +28,7 @@ import {FileService} from "./services/file-service";
     StartPageComponent,
     HomeComponent,
     PageTwoComponent,
-    PageThreeComponent,
+    GroupPageComponent,
     LoginComponent,
     SignupComponent,
     LoginComponent,

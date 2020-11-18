@@ -7,6 +7,7 @@ import { FileModel } from '../models/file.interface';
 import { Local } from 'protractor/built/driverProviders';
 import {Subscription} from "rxjs";
 import {FileService} from "../services/file-service";
+import {HttpClient} from "@angular/common/http";
 
 @Component({
   selector: 'app-home',
@@ -52,12 +53,12 @@ export class HomeComponent implements OnInit {
       text: null
     }];
 
-  constructor(public modal: NgbModal,
-    public modal2: NgbModal, @Inject(FileService)fileService
-              ) {
+  constructor(@Inject(FileService)fileService, public modal: NgbModal,
+              public modal2: NgbModal,
+              private http: HttpClient) {
     this.subscription = new Subscription();
     this.fileService = fileService;
-}
+  }
 
   ngOnInit(): void {
     this.subscription = this.fileService.getAllFiles().subscribe((files) => {
@@ -65,7 +66,7 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  loadModalFileUpload(): void{
+  loadModalFileUpload(): void {
     this.modal.open(CreateFileuploadComponent);
   }
 
