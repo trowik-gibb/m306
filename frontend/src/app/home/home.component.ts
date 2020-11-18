@@ -5,9 +5,9 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {CreateGroupComponent} from '../create-group/create-group.component';
 import { FileModel } from '../models/file.interface';
 import { Local } from 'protractor/built/driverProviders';
-import {Subscription} from "rxjs";
-import {FileService} from "../services/file-service";
-import {HttpClient} from "@angular/common/http";
+import {Subscription} from 'rxjs';
+import {FileService} from '../services/file-service';
+import {HttpClient} from '@angular/common/http';
 
 @Component({
   selector: 'app-home',
@@ -17,6 +17,8 @@ import {HttpClient} from "@angular/common/http";
 export class HomeComponent implements OnInit {
   subscription: Subscription;
   fileService: FileService;
+  files: Array<FileModel> = [];
+  /*
   files: FileModel[] = [{
     type: "pdf",
     name: "dsfjk.pdf",
@@ -52,6 +54,7 @@ export class HomeComponent implements OnInit {
       stream: null,
       text: null
     }];
+   */
 
   constructor(@Inject(FileService)fileService, public modal: NgbModal,
               public modal2: NgbModal,

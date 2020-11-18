@@ -5,7 +5,7 @@ import {HttpErrorResponse} from '@angular/common/http';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {HttpClient} from '@angular/common/http';
 import {FileModel} from '../models/file.interface';
-import {AuthService} from "../auth/auth.service";
+import {AuthService} from '../auth/auth.service';
 
 @Component({
   selector: 'app-create-modal',
@@ -24,7 +24,6 @@ export class CreateFileuploadComponent implements OnInit {
   public state = false;
   public price: number;
 
-  activeModal: NgbActiveModal;
   SERVER_URL = 'http://localhost:8000/newfile/';
   uploadForm: FormGroup;
 
@@ -70,7 +69,12 @@ export class CreateFileuploadComponent implements OnInit {
     formData.append('owner', String(this.authService.getAuthenticatedUser()));
     formData.append('state', this.state ? '1' : '0');
     this.httpClient.post<any>(this.SERVER_URL, formData).subscribe(
-      (res) => console.log(res),
+      (res) => {
+        if (res){
+        this.activeModal.close();
+        console.log(res);
+      }
+      },
       (err) => console.log(err)
     );
   }
