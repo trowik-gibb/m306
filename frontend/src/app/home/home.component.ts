@@ -5,6 +5,7 @@ import { Component, OnInit } from '@angular/core';
 import {CreateGroupComponent} from '../create-group/create-group.component';
 import { FileModel } from '../models/file.interface';
 import { Local } from 'protractor/built/driverProviders';
+import { FileService } from '../services/files.service'
 
 @Component({
   selector: 'app-home',
@@ -50,7 +51,9 @@ export class HomeComponent implements OnInit {
 
   constructor(public modal: NgbModal,
     public modal2: NgbModal,
-              ) {
+    private fileService: FileService
+  ) {
+    this.fileService.getUsersFiles().subscribe(data => console.log(data));
 }
 
   ngOnInit(): void {
