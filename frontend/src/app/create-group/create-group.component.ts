@@ -16,7 +16,7 @@ export class CreateGroupComponent implements OnInit {
   public group: Group;
   public authService: AuthService;
   public activeModal: NgbActiveModal;
-  public SERVER_URL = 'http://localhost:8000/group/new';
+  public SERVER_URL = 'http://localhost:8000/newgroup/';
   public groupForm: FormGroup;
 
 
@@ -39,15 +39,16 @@ export class CreateGroupComponent implements OnInit {
   }
 
   onSubmit(groupData: any): void {
+    this.group = new Group();
     this.group.creator = this.authService.getAuthenticatedUser();
     this.group.name = groupData.name;
-    /*const formData = new FormData();
-    formData.append('file', this.file);
-    formData.append('owner', '1');
-    formData.append('type', '1');
-    */
+    this.group.created_at = new Date();
     this.httpClient.post<Group>(this.SERVER_URL, this.group).subscribe(
-      (res) => console.log(res),
+      (res) => {
+        if (res){
+          this.activeModal.close();
+        }
+      },
       (err) => console.log(err)
     );
   }

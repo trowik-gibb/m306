@@ -20,6 +20,7 @@ import {FormsModule} from '@angular/forms';
 import { CreateGroupComponent } from './create-group/create-group.component';
 import { HttpClient } from '@angular/common/http';
 import { FileComponent } from "./components/file/file.component";
+import {FileService} from "./services/file-service";
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { FileComponent } from "./components/file/file.component";
   ],
   providers: [
     AuthService,
-    AuthGuardService
+    AuthGuardService,
+    FileService
   ],
   bootstrap: [AppComponent]
 })

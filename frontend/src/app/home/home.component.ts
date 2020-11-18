@@ -1,10 +1,12 @@
 import { CreateFileuploadComponent } from '../create-fileuploud/create-fileupload.component';
 import { NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {CreateGroupComponent} from '../create-group/create-group.component';
 import { FileModel } from '../models/file.interface';
 import { Local } from 'protractor/built/driverProviders';
+import {Subscription} from "rxjs";
+import {FileService} from "../services/file-service";
 
 @Component({
   selector: 'app-home',
@@ -12,6 +14,8 @@ import { Local } from 'protractor/built/driverProviders';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+  subscription: Subscription;
+  fileService: FileService;
   files: FileModel[] = [{
     type: "pdf",
     name: "dsfjk.pdf",
@@ -49,11 +53,16 @@ export class HomeComponent implements OnInit {
     }];
 
   constructor(public modal: NgbModal,
-    public modal2: NgbModal,
+    public modal2: NgbModal, @Inject(FileService)fileService
               ) {
+    this.subscription = new Subscription();
+    this.fileService = fileService;
 }
 
   ngOnInit(): void {
+    this.subscription = this.fileService.getAllFiles().subscribe((files) => {
+      this.files = files;
+    });
   }
 
   loadModalFileUpload(): void{
