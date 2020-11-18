@@ -1,12 +1,12 @@
 <div class="container">
   <div class="p-5">
-    <h1 style="width: 700px;">Neue Gruppe erstellen</h1>
+    <h2>Neue Gruppe erstellen</h2>
   </div>
-  <form [formGroup]="formGroupForm" (ngSubmit)="onSubmit()">
+  <form [formGroup]="groupForm" (ngSubmit)="onSubmit(groupForm.value)">
 
     <div class="form-group">
       <label for="description">Grupenname</label>
-      <input type="text" class="form-control" id="description" aria-describedby="emailHelp"
+      <input formControlName="name" type="text" class="form-control" id="description" aria-describedby="emailHelp"
              placeholder="Gruppenname eingeben">
     </div>
 
@@ -15,11 +15,9 @@
               (click)="navigateBack()">Zurück
 
       </button>
-      <button id="save" class="btn btn-primary btn-animated mb-3" type="submit" (click)="this.activeModal.close()"
-      >
+      <button id="save" class="btn btn-primary btn-animated mb-3" type="submit" (click)="this.activeModal.close()">
         Erstellen
       </button>
-
     </div>
   </form>
 </div>

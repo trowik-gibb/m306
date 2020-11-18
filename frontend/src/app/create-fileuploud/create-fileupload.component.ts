@@ -1,10 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {Component, Inject, Input, OnInit} from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import {Location} from '@angular/common';
 import {HttpErrorResponse} from '@angular/common/http';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import {FileModel} from '../models/file.interface';
+import {AuthService} from "../auth/auth.service";
 
 @Component({
   selector: 'app-create-modal',
@@ -18,17 +19,18 @@ export class CreateFileuploadComponent implements OnInit {
   // @Input() confirmationText: string;
   // @Input() btnConfirmLabel: string;
   public file: FileModel;
-
-  activeModal: NgbActiveModal;
+  public activeModal: NgbActiveModal;
+  public authService: AuthService;
   SERVER_URL = 'http://localhost:8000/newfile/';
   uploadForm: FormGroup;
 
-  constructor(activeModal: NgbActiveModal,
+  constructor(@Inject(AuthService) authService, activeModal: NgbActiveModal,
               private location: Location,
               private formBuilder: FormBuilder,
               private httpClient: HttpClient
              ) {
     this.activeModal = activeModal;
+    this.authService = authService;
   }
 
 
@@ -57,8 +59,7 @@ export class CreateFileuploadComponent implements OnInit {
   onSubmit(): void {
     const formData = new FormData();
     formData.append('file', this.file);
-    formData.append('owner', '1');
-    formData.append('type', '1');
+    formData.append('owner', String(this.authService.getAuthenticatedUser()));
     this.httpClient.post<any>(this.SERVER_URL, formData).subscribe(
       (res) => console.log(res),
       (err) => console.log(err)

@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {HttpClient} from '@angular/common/http';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {FileModel} from '../models/file.interface';
+import {Group} from "../models/Group";
+import {AuthService} from "../auth/auth.service";
 
 @Component({
   selector: 'app-create-group',
@@ -11,22 +13,23 @@ import {FileModel} from '../models/file.interface';
 })
 export class CreateGroupComponent implements OnInit {
 
-  public file: FileModel;
+  public group: Group;
+  public authService: AuthService;
+  public activeModal: NgbActiveModal;
+  public SERVER_URL = 'http://localhost:8000/group/new';
+  public groupForm: FormGroup;
 
-  activeModal: NgbActiveModal;
-  SERVER_URL = 'http://localhost:8000/newfile/';
-  formGroupForm: FormGroup;
 
-
-  constructor(activeModal: NgbActiveModal,
+  constructor(@Inject(AuthService) authService, activeModal: NgbActiveModal,
               private httpClient: HttpClient,
               private formBuilder: FormBuilder) {
     this.activeModal = activeModal;
+    this.authService = authService;
   }
 
   ngOnInit(): void {
-    this.formGroupForm = this.formBuilder.group({
-      profile: ['']
+    this.groupForm = this.formBuilder.group({
+      name: ['']
     });
   }
 
@@ -35,12 +38,15 @@ export class CreateGroupComponent implements OnInit {
     // this.location.back();
   }
 
-  onSubmit(): void {
-    const formData = new FormData();
+  onSubmit(groupData: any): void {
+    this.group.creator = this.authService.getAuthenticatedUser();
+    this.group.name = groupData.name;
+    /*const formData = new FormData();
     formData.append('file', this.file);
     formData.append('owner', '1');
     formData.append('type', '1');
-    this.httpClient.post<any>(this.SERVER_URL, formData).subscribe(
+    */
+    this.httpClient.post<Group>(this.SERVER_URL, this.group).subscribe(
       (res) => console.log(res),
       (err) => console.log(err)
     );
