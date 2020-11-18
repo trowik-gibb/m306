@@ -2,7 +2,7 @@ import { PageTwoComponent } from './page-two/page-two.component';
 import { StartPageComponent } from './start-page/start-page.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { PageThreeComponent } from './page-three/page-three.component';
+import { GroupPageComponent } from './group-page/group-page.component';
 
 import { AuthGuardService as AuthGuard } from './auth/auth-guard.service';
 import { LoginComponent } from './login/login.component';
@@ -14,7 +14,7 @@ const routes: Routes = [
   { path: 'signup', component: SignupComponent },
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
   { path: '2', component: PageTwoComponent, canActivate: [AuthGuard]},
-  { path: 'groups', component: PageThreeComponent, canActivate: [AuthGuard]},
+  { path: 'groups', component: GroupPageComponent, canActivate: [AuthGuard]},
   { path: '**', component: HomeComponent, canActivate: [AuthGuard]}
 ];
 
