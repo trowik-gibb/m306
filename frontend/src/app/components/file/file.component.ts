@@ -16,7 +16,7 @@ export class FileComponent {
     public authService: AuthService) {
   }
 
-  isOwn(owner: string) {
-    return this.authService.getUsername() === owner
+  isOwn(ownerId: number) {
+    return this.authService.getUserId() === String(ownerId)
   }
 }

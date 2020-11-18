@@ -28,7 +28,8 @@ export class LoginComponent {
     });
     if (this.form.valid) {
       this.authService.login(this.form.value).subscribe((data: LoginData) => {
-        this.authService.setToken(data.username);
+        console.log(data);
+        this.authService.setToken(data.id);
         this.router.navigate(['home']);
       });
       this.router.navigate(['home']);

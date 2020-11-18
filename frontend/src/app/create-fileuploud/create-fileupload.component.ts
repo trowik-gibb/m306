@@ -1,10 +1,11 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {Component, Inject, Input, OnInit} from '@angular/core';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import {Location} from '@angular/common';
 import {HttpErrorResponse} from '@angular/common/http';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {HttpClient} from '@angular/common/http';
 import {FileModel} from '../models/file.interface';
+import {AuthService} from '../auth/auth.service';
 
 @Component({
   selector: 'app-create-modal',
@@ -18,19 +19,21 @@ export class CreateFileuploadComponent implements OnInit {
   // @Input() confirmationText: string;
   // @Input() btnConfirmLabel: string;
   public file: FileModel;
+  public activeModal: NgbActiveModal;
+  public authService: AuthService;
   public state = false;
   public price: number;
 
-  activeModal: NgbActiveModal;
   SERVER_URL = 'http://localhost:8000/newfile/';
   uploadForm: FormGroup;
 
-  constructor(activeModal: NgbActiveModal,
+  constructor(@Inject(AuthService) authService, activeModal: NgbActiveModal,
               private location: Location,
               private formBuilder: FormBuilder,
               private httpClient: HttpClient
   ) {
     this.activeModal = activeModal;
+    this.authService = authService;
   }
 
 
@@ -63,10 +66,15 @@ export class CreateFileuploadComponent implements OnInit {
     this.file.prize = fileData.price;
     const formData = new FormData();
     formData.append('file', this.file);
-    formData.append('owner', '1');
+    formData.append('owner', String(this.authService.getAuthenticatedUser()));
     formData.append('state', this.state ? '1' : '0');
     this.httpClient.post<any>(this.SERVER_URL, formData).subscribe(
-      (res) => console.log(res),
+      (res) => {
+        if (res){
+        this.activeModal.close();
+        console.log(res);
+      }
+      },
       (err) => console.log(err)
     );
   }
@@ -84,11 +92,5 @@ export class CreateFileuploadComponent implements OnInit {
    }else{
      this.state = false;
    }
-  }
-
-  public setPrivate(): void {
-    this.state = false;
-    console.log(this.state);
-
   }
 }

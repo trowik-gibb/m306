@@ -30,8 +30,8 @@ export class SignupComponent {
     });
     if (this.form.valid) {
       if (this.form.value.password === this.form.value.passwordRep) {
-        this.authService.signup(this.form.value).subscribe((data: SignUpData) => {
-          this.authService.setToken(data.username);
+        this.authService.signup(this.form.value).subscribe((data: any) => {
+          this.authService.setToken(data.id);
           this.router.navigate(['home']);
         });
       }
