@@ -45,7 +45,7 @@ export class AuthService {
   }
 
   public getAuthenticatedUser(): number{
-    return Number(localStorage.getItem('user'));
+    return +localStorage.getItem('user');
   }
 
   public logout() {

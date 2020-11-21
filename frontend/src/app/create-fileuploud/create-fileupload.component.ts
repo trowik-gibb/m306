@@ -23,6 +23,7 @@ export class CreateFileuploadComponent implements OnInit {
   public authService: AuthService;
   public state = false;
   public price: number;
+  public owner: number;
 
   SERVER_URL = 'http://localhost:8000/newfile/';
   uploadForm: FormGroup;

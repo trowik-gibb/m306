@@ -1,7 +1,9 @@
-export interface FileModel extends File{
+import { Person } from "./person.interface";
+
+  export interface FileModel extends File{
   name: string;
   type: string;
-  owner_id: number;
+  owner: Person;
   size: number;
   prize: number;
   public: boolean;

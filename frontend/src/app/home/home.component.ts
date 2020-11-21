@@ -26,8 +26,7 @@ export class HomeComponent implements OnInit {
               private http: HttpClient,
     private fileService: FileService
   ) {
-    this.fileService.getUsersFiles().subscribe(data => console.log(data));
-    this.subscription = new Subscription();
+    this.fileService.getAllFiles().subscribe(data => console.log(data));
 }
 
   ngOnInit(): void {
