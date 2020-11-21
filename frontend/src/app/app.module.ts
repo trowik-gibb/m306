@@ -15,12 +15,14 @@ import { AuthService } from './auth/auth.service';
 import { AuthGuardService } from './auth/auth-guard.service';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
+import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { CreateFileuploadComponent } from './create-fileuploud/create-fileupload.component';
 import {FormsModule} from '@angular/forms';
 import { CreateGroupComponent } from './create-group/create-group.component';
 import { HttpClient } from '@angular/common/http';
 import { FileComponent } from "./components/file/file.component";
 import { FileService } from "./services/files.service";
+import { ShoppingCartService } from "./services/shopping-cart.service";
 
 @NgModule({
   declarations: [
@@ -34,7 +36,8 @@ import { FileService } from "./services/files.service";
     LoginComponent,
     CreateFileuploadComponent,
     CreateGroupComponent,
-    FileComponent
+    FileComponent,
+    ShoppingCartComponent
   ],
   imports: [
     BrowserModule,
@@ -54,7 +57,8 @@ import { FileService } from "./services/files.service";
   providers: [
     AuthService,
     AuthGuardService,
-    FileService
+    FileService,
+    ShoppingCartService
   ],
   bootstrap: [AppComponent]
 })

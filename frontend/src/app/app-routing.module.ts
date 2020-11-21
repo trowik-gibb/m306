@@ -1,4 +1,4 @@
-import { PageTwoComponent } from './page-two/page-two.component';
+import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { StartPageComponent } from './start-page/start-page.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -13,7 +13,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
-  { path: '2', component: PageTwoComponent, canActivate: [AuthGuard]},
+  { path: 'shopping-cart', component: ShoppingCartComponent, canActivate: [AuthGuard]},
   { path: 'groups', component: GroupPageComponent, canActivate: [AuthGuard]},
   { path: '**', component: HomeComponent, canActivate: [AuthGuard]}
 ];
