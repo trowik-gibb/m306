@@ -31,9 +31,9 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.subscription = this.fileService.getAllFiles().subscribe((files) => {
-      let ids = this.shoppingCartService.getFileIds();
-      this.files = files.filter(file => ids.find(id => file.id === +id));
+    this.subscription = this.shoppingCartService.getCartFiles().subscribe((files) => {
+      this.files = files;
+      console.log(files)
     });
   }
 

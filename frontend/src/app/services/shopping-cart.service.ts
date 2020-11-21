@@ -50,10 +50,10 @@ export class ShoppingCartService {
     return [];
   }
 
-  //public getCartFiles(): Observable<FileModel[]> {
-  //  let ids = this.getFileIds();
-  //  const formData = new FormData();
-  //  formData.append('ids', ids);
-  //  return this.http.post(`${BACKEND_PATH}/cartfiles/`, )
-  //}
+  public getCartFiles(): Observable<FileModel[]> {
+    let cartContent: string = localStorage.getItem("cart-content");
+    const formData = new FormData();
+    formData.append('ids', cartContent);
+    return this.http.post<FileModel[]>(`${BACKEND_PATH}/cartfiles/`, formData);
+  }
 }
