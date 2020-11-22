@@ -8,4 +8,5 @@ export interface FileModel extends File{
   size: number;
   price: number;
   public: boolean;
+  shared: boolean;
 }

@@ -1,9 +1,7 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import { FileModel } from '../../models/file.interface';
 import { AuthService } from '../../auth/auth.service';
-import { FileModel } from "../../models/file.interface";
-import { AuthService } from "../../auth/auth.service";
-import { ShoppingCartService } from "../../services/shopping-cart.service";
+import { ShoppingCartService } from '../../services/shopping-cart.service';
 
 @Component({
   selector: 'app-file-element',
@@ -15,7 +13,7 @@ export class FileComponent {
   @Output() openOptionsM: EventEmitter<FileModel>;
 
   @Output()
-  removedFromCart: EventEmitter<{}> = new EventEmitter<{}>()
+  removedFromCart: EventEmitter<{}> = new EventEmitter<{}>();
 
   constructor(public authService: AuthService, private shoppingCartService: ShoppingCartService) {
     this.openOptionsM = new EventEmitter();

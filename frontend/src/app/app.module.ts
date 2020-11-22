@@ -3,9 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClientXsrfModule } from '@angular/common/http';
-import { ToastrModule, ToastrService } from "ngx-toastr";
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { StartPageComponent } from './start-page/start-page.component';
@@ -21,7 +19,6 @@ import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { CreateFileuploadComponent } from './create-fileuploud/create-fileupload.component';
 import {FormsModule} from '@angular/forms';
 import { CreateGroupComponent } from './create-group/create-group.component';
-import { HttpClient } from '@angular/common/http';
 import { FileComponent } from './components/file/file.component';
 import { FileService } from './services/files.service';
 import { FileOptionsComponent } from './file-options/file-options.component';
@@ -31,9 +28,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FindPersonComponent } from './find-person/find-person.component';
 import { PersonComponent } from './person/person.component';
 import { SearchBarComponent } from './search-bar/search-bar.component';
-import {PersonService} from "./services/personservice";
-import {MatDialogModule} from "@angular/material/dialog";
-import {ShareService} from "./services/ShareService";
+import {PersonService} from './services/personservice';
+import {MatDialogModule} from '@angular/material/dialog';
+import {ShareService} from './services/ShareService';
+import {ShoppingCartService} from './services/shopping-cart.service';
 
 @NgModule({
   declarations: [
@@ -71,7 +69,7 @@ import {ShareService} from "./services/ShareService";
     MatCardModule,
     MatIconModule,
     BrowserAnimationsModule,
-    MatDialogModule
+    MatDialogModule,
     HttpClientXsrfModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot()
