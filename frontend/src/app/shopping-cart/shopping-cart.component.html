@@ -1,0 +1,13 @@
+<div class="container">
+  <div class="card m-2">
+    <div class="card-header">
+      Shopping cart
+    </div>
+  </div>
+  <file-element *ngFor="let file of files" [file]="file" (removedFromCart)="onRemovedFromCart(file.id)"></file-element>
+  <div class="card m-2">
+    <div class="card-header">
+      Sum: {{getCartSum()}} CHF
+    </div>
+  </div>
+</div>

@@ -64,9 +64,9 @@ export class CreateFileuploadComponent implements OnInit {
 
   onSubmit(fileData: any): void {
     console.log(fileData.name);
-    this.file.prize = fileData.price;
     const formData = new FormData();
     formData.append('file', this.file);
+    formData.append('price', `${fileData.price}`);
     formData.append('owner', String(this.authService.getAuthenticatedUser()));
     formData.append('state', this.state ? '1' : '0');
     this.httpClient.post<any>(this.SERVER_URL, formData).subscribe(

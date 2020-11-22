@@ -1,12 +1,11 @@
 import {Person} from "./person";
 
-export interface FileModel extends File {
-  file: FileModel;
+export interface FileModel extends File{
   id: number;
   name: string;
   type: string;
   owner: Person;
   size: number;
-  prize: number;
+  price: number;
   public: boolean;
 }
