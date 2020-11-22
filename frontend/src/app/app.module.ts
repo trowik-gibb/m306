@@ -3,6 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClientXsrfModule } from '@angular/common/http';
+import { ToastrModule, ToastrService } from "ngx-toastr";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -23,6 +25,7 @@ import { HttpClient } from '@angular/common/http';
 import { FileComponent } from "./components/file/file.component";
 import { FileService } from "./services/files.service";
 import { ShoppingCartService } from "./services/shopping-cart.service";
+
 
 @NgModule({
   declarations: [
@@ -51,7 +54,9 @@ import { ShoppingCartService } from "./services/shopping-cart.service";
     NgbModule,
     ReactiveFormsModule,
     HttpClientModule,
-    HttpClientXsrfModule
+    HttpClientXsrfModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot()
 
   ],
   providers: [

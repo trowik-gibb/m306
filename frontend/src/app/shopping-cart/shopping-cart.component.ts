@@ -33,7 +33,7 @@ export class ShoppingCartComponent implements OnInit {
   ngOnInit(): void {
     this.subscription = this.shoppingCartService.getCartFiles().subscribe((files) => {
       this.files = files;
-      console.log(files)
+      console.log(files);
     });
   }
 
