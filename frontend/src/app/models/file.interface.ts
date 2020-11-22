@@ -1,6 +1,8 @@
-import { Person } from "./person.interface";
+import {Person} from "./person";
 
-  export interface FileModel extends File{
+export interface FileModel extends File {
+  file: FileModel;
+  id: number;
   name: string;
   type: string;
   owner: Person;
