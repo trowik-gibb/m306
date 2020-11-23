@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PageThreeComponent } from './page-three.component';
+import { FindPersonComponent } from './find-person.component';
 
-describe('PageThreeComponent', () => {
-  let component: PageThreeComponent;
-  let fixture: ComponentFixture<PageThreeComponent>;
+describe('FindPersonComponent', () => {
+  let component: FindPersonComponent;
+  let fixture: ComponentFixture<FindPersonComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PageThreeComponent ]
+      declarations: [ FindPersonComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PageThreeComponent);
+    fixture = TestBed.createComponent(FindPersonComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

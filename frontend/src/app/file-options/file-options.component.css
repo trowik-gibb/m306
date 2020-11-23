@@ -1,0 +1,8 @@
+.option:hover {
+  cursor: pointer;
+  font-size: larger;
+}
+
+.option {
+    user-select: none;
+}

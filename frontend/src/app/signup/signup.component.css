@@ -1,0 +1,15 @@
+.form-signup {
+  max-width: 400px;
+  margin: auto;
+}
+
+.ng-invalid.ng-dirty {
+  border-color: red;
+}
+
+.error {
+  text-align: left;
+  color: red;
+  font-size: small;
+  margin-left: 8px;
+}

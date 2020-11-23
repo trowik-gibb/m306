@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PageOneComponent } from './page-one.component';
+import { FileOptionsComponent } from './file-options.component';
 
-describe('PageOneComponent', () => {
-  let component: PageOneComponent;
-  let fixture: ComponentFixture<PageOneComponent>;
+describe('FileOptionsComponent', () => {
+  let component: FileOptionsComponent;
+  let fixture: ComponentFixture<FileOptionsComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PageOneComponent ]
+      declarations: [ FileOptionsComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PageOneComponent);
+    fixture = TestBed.createComponent(FileOptionsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
