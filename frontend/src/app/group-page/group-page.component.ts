@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {CreateFileuploadComponent} from "../create-fileuploud/create-fileupload.component";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {CreateGroupComponent} from "../create-group/create-group.component";
+import {GroupService} from "../services/group-service";
+import {Group} from "../models/Group";
 
 @Component({
   selector: 'app-page-three',
@@ -9,10 +11,13 @@ import {CreateGroupComponent} from "../create-group/create-group.component";
   styleUrls: ['./group-page.component.css']
 })
 export class GroupPageComponent implements OnInit {
-
-  constructor(public modal2: NgbModal) { }
+  groups: Array<Group> = [];
+  constructor(public modal2: NgbModal, private groupService: GroupService) { }
 
   ngOnInit(): void {
+    this.groupService.getAllGroups().subscribe((value) => {
+      this.groups = value;
+    });
   }
 
   loadModalGroupCreate(): void{

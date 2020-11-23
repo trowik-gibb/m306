@@ -32,6 +32,7 @@ import {PersonService} from './services/personservice';
 import {MatDialogModule} from '@angular/material/dialog';
 import {ShareService} from './services/ShareService';
 import {ShoppingCartService} from './services/shopping-cart.service';
+import {GroupService} from "./services/group-service";
 
 @NgModule({
   declarations: [
@@ -82,7 +83,8 @@ import {ShoppingCartService} from './services/shopping-cart.service';
     PersonService,
     ShareService,
     FileService,
-    ShoppingCartService
+    ShoppingCartService,
+    GroupService
   ],
   bootstrap: [AppComponent]
 })

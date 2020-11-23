@@ -1,0 +1,15 @@
+<div *ngIf="person !== undefined" class="person-item-container" (click)="choose(person)" >
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-2">
+        <mat-icon>person</mat-icon>
+      </div>
+      <div class="col-sm-2">
+        <p>{{person.username}}</p>
+      </div>
+      <div class="col-sm-2">
+        <p>{{person.email}}</p>
+      </div>
+    </div>
+  </div>
+</div>

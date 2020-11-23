@@ -13,15 +13,15 @@ import {
 import {CreateGroupComponent} from '../create-group/create-group.component';
 import {FileModel} from '../models/file.interface';
 import {Local} from 'protractor/built/driverProviders';
-import {FileService} from '../services/files.service'
-import {HttpClient} from "@angular/common/http";
+import {FileService} from '../services/files.service';
+import {HttpClient} from '@angular/common/http';
 import {Subscription, timer} from 'rxjs';
-import {FileOptionsComponent} from "../file-options/file-options.component";
-import {FindPersonComponent} from "../find-person/find-person.component";
-import {timeInterval} from "rxjs/operators";
-import {ShareService} from "../services/ShareService";
-import {AuthService} from "../auth/auth.service";
-import {ShareFilePerson} from "../models/ShareFilePerson";
+import {FileOptionsComponent} from '../file-options/file-options.component';
+import {FindPersonComponent} from '../find-person/find-person.component';
+import {timeInterval} from 'rxjs/operators';
+import {ShareService} from '../services/ShareService';
+import {AuthService} from '../auth/auth.service';
+import {ShareFilePerson} from '../models/ShareFilePerson';
 
 @Component({
   selector: 'app-home',
@@ -53,6 +53,11 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.fileService.fileChanged$.subscribe((value) => {
+      this.files = this.files.filter((file) => {
+        return file !== value;
+      });
+    });
     this.subscription = this.fileService.getAllFiles().subscribe((files) => {
       console.log(files);
       this.files = files;
@@ -89,13 +94,13 @@ export class HomeComponent implements OnInit {
   public openOptions(file: FileModel): void {
     if (!this.opened || this.choosenFile !== file) {
       this.opened = true;
-      let wait = 500;
+      let wait = 200;
       this.choosenFile = file;
       const interval = setInterval(() => {
         const component = this.container.createComponent(this.optionFactory);
         component.instance.file = this.choosenFile;
         wait -= wait;
-        if (wait === 0) {
+        if (wait <= 0) {
           clearInterval(interval);
         }
       }, 200);
