@@ -53,6 +53,7 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
     this.fileService.fileChanged$.subscribe((value) => {
       this.files = this.files.filter((file) => {
         return file !== value;
