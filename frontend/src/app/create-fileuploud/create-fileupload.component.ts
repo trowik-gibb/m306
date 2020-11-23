@@ -1,7 +1,6 @@
 import {Component, Inject, Input, OnInit} from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import {Location} from '@angular/common';
-import {HttpErrorResponse} from '@angular/common/http';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {HttpClient} from '@angular/common/http';
 import {FileModel} from '../models/file.interface';
