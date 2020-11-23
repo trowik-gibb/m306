@@ -53,10 +53,9 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    debugger;
     this.fileService.fileChanged$.subscribe((value) => {
       this.files = this.files.filter((file) => {
-        return file !== value;
+        return file.id !== value.id;
       });
     });
     this.subscription = this.fileService.getAllFiles().subscribe((files) => {
@@ -64,6 +63,7 @@ export class HomeComponent implements OnInit {
       this.files = files;
       this.getSharedFiles();
     });
+    console.log(this.files);
   }
 
   loadModalFileUpload(): void {
