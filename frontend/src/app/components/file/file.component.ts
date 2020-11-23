@@ -1,7 +1,8 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FileModel } from '../../models/file.interface';
 import { AuthService } from '../../auth/auth.service';
 import { ShoppingCartService } from '../../services/shopping-cart.service';
+import { ToastrService, Toast } from "ngx-toastr";
 
 @Component({
   selector: 'app-file-element',
@@ -10,23 +11,21 @@ import { ShoppingCartService } from '../../services/shopping-cart.service';
 })
 export class FileComponent {
   @Input() file: FileModel;
-  //@Output() openOptionsM: EventEmitter<FileModel>;
 
   @Output()
   removedFromCart: EventEmitter<{}> = new EventEmitter<{}>();
 
   showOptions = false;
 
-  constructor(public authService: AuthService, private shoppingCartService: ShoppingCartService) {
-    //this.openOptionsM = new EventEmitter();
+  constructor(
+    public authService: AuthService,
+    private shoppingCartService: ShoppingCartService,
+    private toastr: ToastrService) {
   }
 
   isOwn(ownerId: number): boolean {
     return this.authService.getUserId() === String(ownerId);
   }
-  //public openOptions(): void {
-  //  this.openOptionsM.emit(this.file);
-  //}
 
   public addToCart(id: number): void {
     this.shoppingCartService.addFileToCart(id);
@@ -35,7 +34,7 @@ export class FileComponent {
 
   public removeFromCart(id: number): void {
     this.shoppingCartService.removeFileFromCart(id);
-    console.log(this.shoppingCartService.getFileIds());
+    this.toastr.success("The file was removed from your cart.", "Success");
     this.removedFromCart.emit();
   }
 

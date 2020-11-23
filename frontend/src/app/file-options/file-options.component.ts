@@ -1,13 +1,12 @@
 import { Component, Input, OnInit, ViewChild, OnChanges } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
 import { FileModel } from '../models/file.interface';
 import { FindPersonComponent } from '../find-person/find-person.component';
 import { FileService } from "../services/files.service";
 import { ShoppingCartService } from "../services/shopping-cart.service";
 import { Subject } from "rxjs";
-import { ToastrService, Toast } from "ngx-toastr";
+import { ToastrService} from "ngx-toastr";
 
-import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-file-options',
@@ -24,7 +23,9 @@ export class FileOptionsComponent implements OnInit, OnChanges {
   file: FileModel;
 
   fileChanged: Subject<FileModel>;
-  constructor(private dialog: MatDialog, private fileService: FileService, private cartService: ShoppingCartService,
+  constructor(
+    private fileService: FileService,
+    private cartService: ShoppingCartService,
     private modalService: NgbModal,
     private toastr: ToastrService) {
   }

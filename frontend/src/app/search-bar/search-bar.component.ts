@@ -1,6 +1,6 @@
 import {Component, EventEmitter, OnInit, Output, Input} from '@angular/core';
-import {FormControl, FormGroup} from '@angular/forms';
-import {debounceTime, map} from 'rxjs/operators';
+import {FormControl} from '@angular/forms';
+import {debounceTime} from 'rxjs/operators';
 
 @Component({
   selector: 'app-search-bar',

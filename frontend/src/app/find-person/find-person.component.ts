@@ -3,9 +3,8 @@ import { Person } from '../models/person';
 import { FileModel } from "../models/file.interface";
 import { PersonService } from "../services/personservice";
 import { ShareService } from "../services/ShareService";
-import { MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { AuthService } from "../auth/auth.service";
-import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from "ngx-toastr";
 
 @Component({

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { CreateFileuploadComponent } from "../create-fileuploud/create-fileupload.component";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { CreateGroupComponent } from "../create-group/create-group.component";
 import { GroupService } from "../services/group-service";

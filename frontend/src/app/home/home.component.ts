@@ -1,23 +1,19 @@
 import { CreateFileuploadComponent } from '../create-fileuploud/create-fileupload.component';
-import { NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import {
   Component,
   ComponentFactory,
-  ComponentFactoryResolver, ComponentRef,
+  ComponentFactoryResolver,
   Inject,
   OnInit,
   ViewChild,
   ViewContainerRef
 } from '@angular/core';
-import { CreateGroupComponent } from '../create-group/create-group.component';
 import { FileModel } from '../models/file.interface';
-import { Local } from 'protractor/built/driverProviders';
 import { FileService } from '../services/files.service';
 import { HttpClient } from '@angular/common/http';
-import { Subscription, timer } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { FileOptionsComponent } from '../file-options/file-options.component';
-import { timeInterval } from 'rxjs/operators';
 import { ShareService } from '../services/ShareService';
 import { AuthService } from '../auth/auth.service';
 import { ShareFilePerson } from '../models/ShareFilePerson';
@@ -38,8 +34,6 @@ export class HomeComponent implements OnInit {
   opened: boolean;
   shareService: ShareService;
   activePage = 1;
-
-  private PARKING_API = 'localhost:8080/allfiles';
 
   constructor(@Inject(ShareService) shareService, public modal: NgbModal,
     public modal2: NgbModal,
@@ -78,10 +72,6 @@ export class HomeComponent implements OnInit {
     })
   }
 
-  loadModalGroupCreate(): void {
-    this.modal2.open(CreateGroupComponent);
-  }
-
   public getSharedFiles(): void {
     this.shareService.getSharedFiles(this.authService.getAuthenticatedUser()).subscribe((value) => {
       this.sharedFiles = value;
@@ -91,20 +81,4 @@ export class HomeComponent implements OnInit {
       }
     });
   }
-
-  //public openOptions(file: FileModel): void {
-  //  if (!this.opened || this.choosenFile !== file) {
-  //    this.opened = true;
-  //    let wait = 200;
-  //    this.choosenFile = file;
-  //    const interval = setInterval(() => {
-  //      const component = this.container.createComponent(this.optionFactory);
-  //      component.instance.file = this.choosenFile;
-  //      wait -= wait;
-  //      if (wait <= 0) {
-  //        clearInterval(interval);
-  //      }
-  //    }, 200);
-  //  }
-  //}
 }

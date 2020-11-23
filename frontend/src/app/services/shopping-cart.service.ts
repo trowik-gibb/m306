@@ -46,7 +46,6 @@ export class ShoppingCartService {
     ids = ids.filter(item => +item !== id)
     cartContent = ids.join(";");
     localStorage.setItem(this.getItemName(), cartContent);
-    this.toastr.success("The file was removed from your cart.", "Success");
   }
 
   public emptyCart() {

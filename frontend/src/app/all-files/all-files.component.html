@@ -8,11 +8,6 @@
   <div *ngIf="files; else loading">
     <div *ngFor="let file of getFiles()">
       <app-file-element [file]="file"></app-file-element>
-      <!--<div *ngIf="choosenFile !== undefined"  class="col-4">
-        <div #optioncontainer *ngIf="file.id === choosenFile.id"  class="option-container">
-
-        </div>
-      </div>-->
     </div>
   </div>
   <ng-template #loading>

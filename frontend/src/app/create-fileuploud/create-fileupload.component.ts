@@ -1,4 +1,4 @@
-import {Component, Inject, Input, OnInit, Output, EventEmitter} from '@angular/core';
+import {Component, Inject, OnInit, Output, EventEmitter} from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import {Location} from '@angular/common';
 import {FormBuilder, FormGroup} from '@angular/forms';
@@ -15,10 +15,6 @@ export class CreateFileuploadComponent implements OnInit {
   @Output()
   fileUploaded: EventEmitter<FileModel> = new EventEmitter<FileModel>();
 
-  // @Input() title: string;
-  // @Input() subtitle: string;
-  // @Input() confirmationText: string;
-  // @Input() btnConfirmLabel: string;
   public file: FileModel;
   public activeModal: NgbActiveModal;
   public authService: AuthService;
@@ -42,25 +38,12 @@ export class CreateFileuploadComponent implements OnInit {
   ngOnInit(): void {
     this.uploadForm = this.formBuilder.group({
       profile: [''],
-      name: ['name'],
       price: [0.0]
     });
   }
 
-
-  handleSave(): void {
-    /*
-          this.parkingLotService.createParkingLot(submittedParkingLot).subscribe(
-            () => {
-              this.toastrService.success(this.translateService.instant('parking-lot.form.toaster.created'));
-            }, (response: HttpErrorResponse) => this.errors = response.error!.validationErrors as ValidationError[]
-          );
-     */
-  }
-
   navigateBack(): void {
     this.activeModal.close();
-    // this.location.back();
   }
 
   onSubmit(fileData: any): void {
