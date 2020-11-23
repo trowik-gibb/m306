@@ -1,10 +1,10 @@
-import {Component, Inject, OnInit, Output, EventEmitter} from '@angular/core';
+import { Component, Inject, OnInit, Output, EventEmitter } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import {Location} from '@angular/common';
-import {FormBuilder, FormGroup} from '@angular/forms';
-import {HttpClient} from '@angular/common/http';
-import {FileModel} from '../models/file.interface';
-import {AuthService} from '../auth/auth.service';
+import { Location } from '@angular/common';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
+import { FileModel } from '../models/file.interface';
+import { AuthService } from '../auth/auth.service';
 
 @Component({
   selector: 'app-create-modal',
@@ -26,9 +26,9 @@ export class CreateFileuploadComponent implements OnInit {
   uploadForm: FormGroup;
 
   constructor(@Inject(AuthService) authService, activeModal: NgbActiveModal,
-              private location: Location,
-              private formBuilder: FormBuilder,
-              private httpClient: HttpClient
+    private location: Location,
+    private formBuilder: FormBuilder,
+    private httpClient: HttpClient
   ) {
     this.activeModal = activeModal;
     this.authService = authService;
@@ -58,9 +58,9 @@ export class CreateFileuploadComponent implements OnInit {
         this.file = res;
         if (this.file) {
           this.fileUploaded.emit(res);
-        this.activeModal.close();
-        console.log(res);
-      }else{
+          this.activeModal.close();
+          console.log(res);
+        } else {
           console.log('Deine Datei kann nicht hochgeladen werden');
         }
       },
@@ -76,10 +76,10 @@ export class CreateFileuploadComponent implements OnInit {
   }
 
   public setPublic(): void {
-   if (!this.state){
+    if (!this.state) {
       this.state = true;
-   }else{
-     this.state = false;
-   }
+    } else {
+      this.state = false;
+    }
   }
 }
