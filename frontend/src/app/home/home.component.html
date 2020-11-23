@@ -9,5 +9,14 @@
       <a (click)="loadModalFileUpload()" class="btn btn-primary">Upload File</a>
     </div>
   </div>
-  <file-element *ngFor="let file of files" [file]="file"></file-element>
+  <div *ngFor="let file of files" class="row">
+    <div class="col-5">
+      <app-file-element (openOptionsM)="openOptions($event)" [file]="file" ></app-file-element>
+    </div>
+    <div *ngIf="choosenFile !== undefined"  class="col-4">
+      <div #optioncontainer *ngIf="file.id === choosenFile.id"  class="option-container">
+
+      </div>
+    </div>
+  </div>
 </div>

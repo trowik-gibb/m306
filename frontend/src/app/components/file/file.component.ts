@@ -1,42 +1,42 @@
-import { Component, Input, Output, EventEmitter } from "@angular/core";
-
-import { FileModel } from "../../models/file.interface";
-import { AuthService } from "../../auth/auth.service";
-import { ShoppingCartService } from "../../services/shopping-cart.service";
+import {Component, EventEmitter, Input, Output} from '@angular/core';
+import { FileModel } from '../../models/file.interface';
+import { AuthService } from '../../auth/auth.service';
+import { ShoppingCartService } from '../../services/shopping-cart.service';
 
 @Component({
-  selector: "file-element",
-  templateUrl: "file.component.html",
-  styleUrls: ["file.component.css"]
+  selector: 'app-file-element',
+  templateUrl: 'file.component.html',
+  styleUrls: ['file.component.css']
 })
 export class FileComponent {
-  @Input()
-  file: FileModel;
+  @Input() file: FileModel;
+  @Output() openOptionsM: EventEmitter<FileModel>;
 
   @Output()
-  removedFromCart: EventEmitter<{}> = new EventEmitter<{}>()
+  removedFromCart: EventEmitter<{}> = new EventEmitter<{}>();
 
-  constructor(
-    public authService: AuthService,
-    private shoppingCartService: ShoppingCartService) {
+  constructor(public authService: AuthService, private shoppingCartService: ShoppingCartService) {
+    this.openOptionsM = new EventEmitter();
   }
 
-  isOwn(ownerId: number) {
-    return this.authService.getUserId() === String(ownerId)
+  isOwn(ownerId: number): boolean {
+    return this.authService.getUserId() === String(ownerId);
   }
-
-  addToCart(id: number) {
+  public openOptions(): void {
+    this.openOptionsM.emit(this.file);
+  }
+  public addToCart(id: number): void {
     this.shoppingCartService.addFileToCart(id);
     console.log(this.shoppingCartService.getFileIds());
   }
 
-  removeFromCart(id: number) {
+  public removeFromCart(id: number): void {
     this.shoppingCartService.removeFileFromCart(id);
     console.log(this.shoppingCartService.getFileIds());
     this.removedFromCart.emit();
   }
 
-  isInCart(id: number) {
+  public isInCart(id: number): boolean {
     return this.shoppingCartService.isFileInCart(id);
   }
 }

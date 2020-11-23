@@ -1,4 +1,4 @@
-import { Person } from "./person.interface";
+import {Person} from "./person";
 
 export interface FileModel extends File{
   id: number;
@@ -8,4 +8,5 @@ export interface FileModel extends File{
   size: number;
   price: number;
   public: boolean;
+  shared: boolean;
 }
