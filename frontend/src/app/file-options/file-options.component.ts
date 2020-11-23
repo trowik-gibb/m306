@@ -35,11 +35,12 @@ export class FileOptionsComponent implements OnInit {
   }
 
   private deletFile(file: FileModel): void {
+    debugger;
     this.fileService.deleteFile(file.id).subscribe((value) => {
       const file$ = value;
-      if (file$){
+      if (file$.id){
         console.log('Datei gelöscht');
       }
-    })
+    });
   }
 }
