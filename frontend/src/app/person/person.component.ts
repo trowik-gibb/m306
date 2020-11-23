@@ -3,8 +3,8 @@ import {Person} from "../models/person";
 
 @Component({
   selector: 'app-person',
-  templateUrl: './person.component.html',
-  styleUrls: ['./person.component.css']
+  templateUrl: 'person.component.html',
+  styleUrls: ['person.component.css']
 })
 export class PersonComponent implements OnInit {
 

@@ -1,6 +1,6 @@
-import {CreateFileuploadComponent} from '../create-fileuploud/create-fileupload.component';
-import {NgbModal, NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import {Router} from '@angular/router';
+import { CreateFileuploadComponent } from '../create-fileuploud/create-fileupload.component';
+import { NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { Router } from '@angular/router';
 import {
   Component,
   ComponentFactory,
@@ -10,18 +10,17 @@ import {
   ViewChild,
   ViewContainerRef
 } from '@angular/core';
-import {CreateGroupComponent} from '../create-group/create-group.component';
-import {FileModel} from '../models/file.interface';
-import {Local} from 'protractor/built/driverProviders';
-import {FileService} from '../services/files.service';
-import {HttpClient} from '@angular/common/http';
-import {Subscription, timer} from 'rxjs';
-import {FileOptionsComponent} from '../file-options/file-options.component';
-import {FindPersonComponent} from '../find-person/find-person.component';
-import {timeInterval} from 'rxjs/operators';
-import {ShareService} from '../services/ShareService';
-import {AuthService} from '../auth/auth.service';
-import {ShareFilePerson} from '../models/ShareFilePerson';
+import { CreateGroupComponent } from '../create-group/create-group.component';
+import { FileModel } from '../models/file.interface';
+import { Local } from 'protractor/built/driverProviders';
+import { FileService } from '../services/files.service';
+import { HttpClient } from '@angular/common/http';
+import { Subscription, timer } from 'rxjs';
+import { FileOptionsComponent } from '../file-options/file-options.component';
+import { timeInterval } from 'rxjs/operators';
+import { ShareService } from '../services/ShareService';
+import { AuthService } from '../auth/auth.service';
+import { ShareFilePerson } from '../models/ShareFilePerson';
 
 @Component({
   selector: 'app-home',
@@ -29,10 +28,10 @@ import {ShareFilePerson} from '../models/ShareFilePerson';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  @ViewChild('optioncontainer', {read: ViewContainerRef}) container;
+  @ViewChild('optioncontainer', { read: ViewContainerRef }) container;
   subscription: Subscription;
   files: Array<FileModel> = [];
-  sharedFiles: Array<ShareFilePerson> = [];
+  sharedFiles: Array<ShareFilePerson>;
   choosenFile: FileModel;
   optionFactory: ComponentFactory<FileOptionsComponent>;
   opened: boolean;
@@ -41,11 +40,11 @@ export class HomeComponent implements OnInit {
   private PARKING_API = 'localhost:8080/allfiles';
 
   constructor(@Inject(ShareService) shareService, public modal: NgbModal,
-              public modal2: NgbModal,
-              private http: HttpClient,
-              private fileService: FileService,
-              private resolver: ComponentFactoryResolver,
-              private authService: AuthService
+    public modal2: NgbModal,
+    private http: HttpClient,
+    private fileService: FileService,
+    private resolver: ComponentFactoryResolver,
+    private authService: AuthService
   ) {
     this.optionFactory = this.resolver.resolveComponentFactory(FileOptionsComponent);
     this.fileService.getAllFiles().subscribe(data => console.log(data));
@@ -55,9 +54,11 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
 
     this.fileService.fileChanged$.subscribe((value) => {
-      this.files = this.files.filter((file) => {
-        return file.id !== value.id;
-      });
+      if (this.files) {
+        this.files = this.files.filter((file) => {
+          return file.id !== value.id;
+        });
+      }
     });
     this.subscription = this.fileService.getAllFiles().subscribe((files) => {
       console.log(files);

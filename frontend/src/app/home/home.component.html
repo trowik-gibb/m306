@@ -9,14 +9,19 @@
       <a (click)="loadModalFileUpload()" class="btn btn-primary">Upload File</a>
     </div>
   </div>
-  <div *ngFor="let file of files" class="row">
-    <div class="col-5">
-      <app-file-element (openOptionsM)="openOptions($event)" [file]="file" ></app-file-element>
-    </div>
-    <div *ngIf="choosenFile !== undefined"  class="col-4">
-      <div #optioncontainer *ngIf="file.id === choosenFile.id"  class="option-container">
+  <div *ngIf="files; else loading">
+    <div *ngFor="let file of files">
+      <app-file-element [file]="file"></app-file-element>
+      <!--<div *ngIf="choosenFile !== undefined"  class="col-4">
+        <div #optioncontainer *ngIf="file.id === choosenFile.id"  class="option-container">
 
-      </div>
+        </div>
+      </div>-->
     </div>
   </div>
+  <ng-template #loading>
+    <div class="spinner-border" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+  </ng-template>
 </div>

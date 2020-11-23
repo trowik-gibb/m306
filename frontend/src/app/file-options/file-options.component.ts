@@ -12,7 +12,10 @@ import {Subject} from "rxjs";
 })
 export class FileOptionsComponent implements OnInit {
   options = ['Datei teilen', 'Datei bearbeiten', 'Datei löschen'];
-  file: FileModel = null;
+
+  @Input()
+  file: FileModel;
+
   fileChanged: Subject<FileModel>;
   constructor(private dialog: MatDialog, private fileService: FileService) {
     this.fileChanged = new Subject<FileModel>();

@@ -22,7 +22,8 @@ export class CreateGroupComponent implements OnInit {
 
   constructor(@Inject(AuthService) authService, activeModal: NgbActiveModal,
               private httpClient: HttpClient,
-              private formBuilder: FormBuilder) {
+              private formBuilder: FormBuilder,
+             ) {
     this.activeModal = activeModal;
     this.authService = authService;
   }
@@ -39,11 +40,10 @@ export class CreateGroupComponent implements OnInit {
   }
 
   onSubmit(groupData: any): void {
-    this.group = new Group();
-    this.group.creator = this.authService.getAuthenticatedUser();
-    this.group.name = groupData.name;
-    this.group.created_at = new Date();
-    this.httpClient.post<Group>(this.SERVER_URL, this.group).subscribe(
+    const formData = new FormData();
+    formData.append('creator', String(this.authService.getAuthenticatedUser()));
+    formData.append('name', groupData.name);
+    this.httpClient.post<Group>(this.SERVER_URL, formData).subscribe(
       (res) => {
         if (res){
           this.activeModal.close();

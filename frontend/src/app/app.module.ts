@@ -1,4 +1,6 @@
+import "@angular/compiler";
 import { HomeComponent } from './home/home.component';
+import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -46,13 +48,12 @@ import {GroupService} from "./services/group-service";
     LoginComponent,
     CreateFileuploadComponent,
     CreateGroupComponent,
-    FileComponent,
     FileOptionsComponent,
-    FindPersonComponent,
-    PersonComponent,
     SearchBarComponent,
     FileComponent,
-    ShoppingCartComponent
+    ShoppingCartComponent,
+    PersonComponent,
+    FindPersonComponent
   ],
   imports: [
     BrowserModule,
@@ -73,7 +74,8 @@ import {GroupService} from "./services/group-service";
     MatDialogModule,
     HttpClientXsrfModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    CommonModule
 
   ],
   providers: [

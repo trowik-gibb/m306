@@ -31,6 +31,8 @@ export class AuthService {
 
   public login(loginData: LoginData) {
     const formData = new FormData();
+    formData.append('csrfmidlewaretoken', "csrf"); 
+    formData.append('X - CSRF - TOKEN', "csrf");
     formData.append('username', loginData.username);
     formData.append('password', loginData.password);
     return this.http.post(`${BACKEND_PATH}/login/`, formData);

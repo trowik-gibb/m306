@@ -1,5 +1,5 @@
-<mat-card>
-  <mat-card-content (click)="dispatchAction(option)" *ngFor="let option of options">
-    {{option}}
-  </mat-card-content>
-</mat-card>
+<div>
+  <div class="d-block" (click)="dispatchAction(option)" *ngFor="let option of options">
+    <span class="option">{{option}}</span>
+  </div>
+</div>
