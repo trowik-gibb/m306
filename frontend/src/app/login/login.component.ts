@@ -5,6 +5,8 @@ import { FormBuilder, Validators } from "@angular/forms";
 import { LoginData } from "../auth/models/login-data.interface";
 import { AuthService } from "../auth/auth.service";
 
+import { ToastrService } from "ngx-toastr";
+
 @Component({
   selector: "login",
   templateUrl: "login.component.html",
@@ -20,7 +22,8 @@ export class LoginComponent {
   constructor(
     private router: Router,
     private fb: FormBuilder,
-    private authService: AuthService) { }
+    private authService: AuthService,
+  private toastr: ToastrService) { }
 
   login() {
     (<any>Object).values(this.form.controls).forEach(control => {
@@ -28,9 +31,10 @@ export class LoginComponent {
     });
     if (this.form.valid) {
       this.authService.login(this.form.value).subscribe((data: LoginData) => {
-        console.log(data);
+        console.log(data)
         this.authService.setToken(data.id);
         this.router.navigate(['home']);
+        this.toastr.success("You have logged in successfully.", "Welcome");
       });
       this.router.navigate(['home']);
     }

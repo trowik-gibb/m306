@@ -23,6 +23,7 @@ export class ShoppingCartService {
     if (ids.length < 10) {
       if (!ids.find(item => +item === id)) {
         ids = [...ids, `${id}`];
+        this.toastr.success("The file was added to your cart.", "Success");
       }
       else {
         this.toastr.error("The selected file is already in your cart.", "File already in cart")
@@ -45,6 +46,7 @@ export class ShoppingCartService {
     ids = ids.filter(item => +item !== id)
     cartContent = ids.join(";");
     localStorage.setItem(this.getItemName(), cartContent);
+    this.toastr.success("The file was removed from your cart.", "Success");
   }
 
   public emptyCart() {

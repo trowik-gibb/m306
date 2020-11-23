@@ -19,3 +19,16 @@
     background: #FFF;
     font-size: smaller;
 }
+
+ul {
+    width: 100%;
+}
+
+li {
+    margin: 5px;
+}
+
+.navbar-collapse.collapsing li,
+.navbar-collapse.show li {
+    margin-left: auto;
+}

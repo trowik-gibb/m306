@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output, Input} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {debounceTime, map} from 'rxjs/operators';
 
@@ -8,6 +8,8 @@ import {debounceTime, map} from 'rxjs/operators';
   styleUrls: ['search-bar.component.css']
 })
 export class SearchBarComponent implements OnInit {
+  @Input()
+  placeholder: string;
   searchBar = new FormControl();
   @Output()find: EventEmitter<string>;
   constructor() {this.find = new EventEmitter<string>(); }
@@ -16,7 +18,7 @@ export class SearchBarComponent implements OnInit {
   }
 
   public searchPerson(queryString: string): void{
-    this.searchBar.valueChanges.pipe((debounceTime(500))).subscribe((query) => {
+    this.searchBar.valueChanges.pipe((debounceTime(50))).subscribe((query) => {
       console.log('query:', query);
       this.find.emit(query);
     });

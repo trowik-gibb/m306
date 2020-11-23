@@ -8,13 +8,27 @@
     <app-file-element *ngFor="let file of files" [file]="file" (removedFromCart)="onRemovedFromCart(file.id)"></app-file-element>
   </div>
   <ng-template #loading>
-    <div class="spinner-border" role="status">
-      <span class="sr-only">Loading...</span>
+    <div class="d-flex justify-content-center">
+      <div class="spinner-border m-3" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
     </div>
   </ng-template>
-  <div class="card m-2">
-    <div class="card-header">
-      Sum: {{getCartSum()}} CHF
+  <div *ngIf="files" class="card m-2">
+    <div class="card-header d-flex slign-middle">
+      <table>
+        <tr>
+          <td class="pr-3">Price sum:</td>
+          <td class="text-right pr-1">{{getCartSum()}}</td>
+          <td>CHF</td>
+        </tr>
+        <tr>
+          <td>Size sum:</td>
+          <td class="text-right pr-1">{{getCartSize()}}</td>
+          <td>KB</td>
+        </tr>
+      </table>
+      <button class="btn btn-secondary ml-auto" (click)="download()">Download cart</button>
     </div>
   </div>
 </div>

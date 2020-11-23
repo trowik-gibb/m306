@@ -3,7 +3,7 @@ import { HomeComponent } from './home/home.component';
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClientXsrfModule } from '@angular/common/http';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { AppRoutingModule } from './app-routing.module';
@@ -19,7 +19,6 @@ import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { CreateFileuploadComponent } from './create-fileuploud/create-fileupload.component';
-import {FormsModule} from '@angular/forms';
 import { CreateGroupComponent } from './create-group/create-group.component';
 import { FileComponent } from './components/file/file.component';
 import { FileService } from './services/files.service';
@@ -34,7 +33,12 @@ import {PersonService} from './services/personservice';
 import {MatDialogModule} from '@angular/material/dialog';
 import {ShareService} from './services/ShareService';
 import {ShoppingCartService} from './services/shopping-cart.service';
-import {GroupService} from "./services/group-service";
+import { GroupService } from "./services/group-service";
+import { AllFilesComponent } from "./all-files/all-files.component";
+
+const toastrOptions = {
+  timeOut: 1500,
+};
 
 @NgModule({
   declarations: [
@@ -53,7 +57,8 @@ import {GroupService} from "./services/group-service";
     FileComponent,
     ShoppingCartComponent,
     PersonComponent,
-    FindPersonComponent
+    FindPersonComponent,
+    AllFilesComponent
   ],
   imports: [
     BrowserModule,
@@ -74,7 +79,7 @@ import {GroupService} from "./services/group-service";
     MatDialogModule,
     HttpClientXsrfModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot(),
+    ToastrModule.forRoot(toastrOptions),
     CommonModule
 
   ],

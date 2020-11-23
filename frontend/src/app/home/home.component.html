@@ -1,27 +1,65 @@
 <div class="container">
   <div class="card m-2">
     <div class="card-header">
-      Home Home Home
+      File Upload
     </div>
     <div class="card-body">
-      <h5 class="card-title">File Upload</h5>
       <p class="card-text">Upload your own File/Document</p>
       <a (click)="loadModalFileUpload()" class="btn btn-primary">Upload File</a>
     </div>
   </div>
-  <div *ngIf="files; else loading">
-    <div *ngFor="let file of files">
-      <app-file-element [file]="file"></app-file-element>
-      <!--<div *ngIf="choosenFile !== undefined"  class="col-4">
-        <div #optioncontainer *ngIf="file.id === choosenFile.id"  class="option-container">
-
+  <ul class="nav nav-tabs m-2">
+    <li class="nav-item">
+      <a class="nav-link {{activePage === 1 ? 'active': ''}}" (click)="activePage=1" role="button">Own Files</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link {{activePage === 2 ? 'active': ''}}" (click)="activePage=2" role="button">Shared Files</a>
+    </li>
+  </ul>
+  <div *ngIf="activePage === 1">
+    <div *ngIf="ownFiles; else loading">
+      <div *ngIf="ownFiles.length === 0" class="card m-2">
+        <div class="card-body">
+          You haven't uploaded any files yet.
         </div>
-      </div>-->
+      </div>
+      <div *ngFor="let file of ownFiles">
+        <app-file-element [file]="file"></app-file-element>
+        <!--<div *ngIf="choosenFile !== undefined"  class="col-4">
+          <div #optioncontainer *ngIf="file.id === choosenFile.id"  class="option-container">
+          </div>
+        </div>-->
+      </div>
     </div>
+    <ng-template #loading>
+      <div class="d-flex justify-content-center">
+        <div class="spinner-border m-3" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+      </div>
+    </ng-template>
   </div>
-  <ng-template #loading>
-    <div class="spinner-border" role="status">
-      <span class="sr-only">Loading...</span>
+  <div *ngIf="activePage === 2">
+    <div *ngIf="sharedFiles; else loading">
+      <div *ngIf="sharedFiles.length === 0" class="card m-2">
+        <div class="card-body">
+          No one has yet shared a file with you.
+        </div>
+      </div>
+      <div *ngFor="let file of sharedFiles">
+        <app-file-element [file]="file"></app-file-element>
+        <!--<div *ngIf="choosenFile !== undefined"  class="col-4">
+          <div #optioncontainer *ngIf="file.id === choosenFile.id"  class="option-container">
+          </div>
+        </div>-->
+      </div>
     </div>
-  </ng-template>
+    <ng-template #loading>
+      <div class="d-flex justify-content-center">
+        <div class="spinner-border m-3" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+      </div>
+    </ng-template>
+  </div>
 </div>

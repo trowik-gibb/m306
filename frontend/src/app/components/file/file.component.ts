@@ -42,4 +42,13 @@ export class FileComponent {
   public isInCart(id: number): boolean {
     return this.shoppingCartService.isFileInCart(id);
   }
+
+  public getSizeInKB(): number {
+    return Math.ceil(this.file.size / 1024);
+  }
+
+  public isImage(): boolean {
+    let type = this.file.type.type;
+    return type.toLowerCase().includes("image");
+  }
 }

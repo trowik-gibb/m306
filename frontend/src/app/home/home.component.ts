@@ -21,6 +21,7 @@ import { timeInterval } from 'rxjs/operators';
 import { ShareService } from '../services/ShareService';
 import { AuthService } from '../auth/auth.service';
 import { ShareFilePerson } from '../models/ShareFilePerson';
+import { ToastrService } from "ngx-toastr";
 
 @Component({
   selector: 'app-home',
@@ -30,12 +31,13 @@ import { ShareFilePerson } from '../models/ShareFilePerson';
 export class HomeComponent implements OnInit {
   @ViewChild('optioncontainer', { read: ViewContainerRef }) container;
   subscription: Subscription;
-  files: Array<FileModel> = [];
+  ownFiles: Array<FileModel>;
   sharedFiles: Array<ShareFilePerson>;
   choosenFile: FileModel;
   optionFactory: ComponentFactory<FileOptionsComponent>;
   opened: boolean;
   shareService: ShareService;
+  activePage = 1;
 
   private PARKING_API = 'localhost:8080/allfiles';
 
@@ -44,7 +46,8 @@ export class HomeComponent implements OnInit {
     private http: HttpClient,
     private fileService: FileService,
     private resolver: ComponentFactoryResolver,
-    private authService: AuthService
+    private authService: AuthService,
+    private toastr: ToastrService
   ) {
     this.optionFactory = this.resolver.resolveComponentFactory(FileOptionsComponent);
     this.fileService.getAllFiles().subscribe(data => console.log(data));
@@ -53,22 +56,26 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.fileService.fileChanged$.subscribe((value) => {
-      if (this.files) {
-        this.files = this.files.filter((file) => {
+      if (this.ownFiles) {
+        this.ownFiles = this.ownFiles.filter((file) => {
           return file.id !== value.id;
         });
       }
     });
-    this.subscription = this.fileService.getAllFiles().subscribe((files) => {
+    this.subscription = this.fileService.getUsersFiles().subscribe((files: FileModel[]) => {
       console.log(files);
-      this.files = files;
+      this.ownFiles = files;
       this.getSharedFiles();
     });
-    console.log(this.files);
+    console.log(this.ownFiles);
   }
 
   loadModalFileUpload(): void {
-    this.modal.open(CreateFileuploadComponent);
+    let modalRef = this.modal.open(CreateFileuploadComponent);
+    modalRef.componentInstance.fileUploaded.subscribe(newFile => {
+      this.ownFiles = [...this.ownFiles, newFile];
+      this.toastr.success("File uploaded.", "Success");
+    })
   }
 
   loadModalGroupCreate(): void {
@@ -81,31 +88,23 @@ export class HomeComponent implements OnInit {
       if (this.sharedFiles.length > 0) {
         console.log(value);
         console.log('Eine Person hat mit dir Dateien geteilt');
-        this.sharedFiles.forEach((sharedFile) => {
-          this.files.forEach((file) => {
-            if (file.id === sharedFile.file.id) {
-              file.shared = true;
-            }
-          });
-        });
       }
-      console.log(this.files);
     });
   }
 
-  public openOptions(file: FileModel): void {
-    if (!this.opened || this.choosenFile !== file) {
-      this.opened = true;
-      let wait = 200;
-      this.choosenFile = file;
-      const interval = setInterval(() => {
-        const component = this.container.createComponent(this.optionFactory);
-        component.instance.file = this.choosenFile;
-        wait -= wait;
-        if (wait <= 0) {
-          clearInterval(interval);
-        }
-      }, 200);
-    }
-  }
+  //public openOptions(file: FileModel): void {
+  //  if (!this.opened || this.choosenFile !== file) {
+  //    this.opened = true;
+  //    let wait = 200;
+  //    this.choosenFile = file;
+  //    const interval = setInterval(() => {
+  //      const component = this.container.createComponent(this.optionFactory);
+  //      component.instance.file = this.choosenFile;
+  //      wait -= wait;
+  //      if (wait <= 0) {
+  //        clearInterval(interval);
+  //      }
+  //    }, 200);
+  //  }
+  //}
 }

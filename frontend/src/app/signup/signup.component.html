@@ -1,6 +1,5 @@
-<div class="container">
-  <body class="text-center">
-    <form [formGroup]="form" class="form-signup" (ngSubmit)="signup()">
+<div class="container text-center align-items-center">
+    <form [formGroup]="form" class="form-signup mt-3" (ngSubmit)="signup()">
       <h1 class="h3 mb-3 font-weight-normal">Please sign up</h1>
       <label for="inputUsername" class="sr-only">Username</label>
       <input formControlName="username" type="text" id="inputUsername" class="form-control m-2" placeholder="Username" required autofocus="">
@@ -17,8 +16,7 @@
       <input formControlName="passwordRep" type="password" id="inputPasswordRepeat" class="form-control m-2" placeholder="Repeat Password" required>
       <p class="error" *ngIf="form.controls.passwordRep.errors?.required && form.controls.passwordRep.dirty">Please repeat the password.</p>
       <p class="error" *ngIf="!form.controls.passwordRep.errors?.required && form.controls.passwordRep.errors?.noMatch && form.controls.passwordRep.dirty">The passwords don't match.</p>
-      <button class="btn btn-lg btn-primary btn-block m-2" type="submit">Sign up</button>
-      <a routerLink="/login">Already have an account? Log in instead...</a>
+      <button class="btn btn-lg btn-dark btn-block m-2" type="submit">Sign up</button>
+      <a class="text-secondary" routerLink="/login">Already have an account? Log in instead...</a>
     </form>
-    </body>
 </div>

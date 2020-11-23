@@ -1,8 +1,10 @@
 .option:hover {
   cursor: pointer;
-  font-size: larger;
+  font-size: 1.1em;
 }
 
 .option {
     user-select: none;
+    color: gray;
+    margin-bottom: 2px;
 }

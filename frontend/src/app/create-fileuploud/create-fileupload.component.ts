@@ -1,4 +1,4 @@
-import {Component, Inject, Input, OnInit} from '@angular/core';
+import {Component, Inject, Input, OnInit, Output, EventEmitter} from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import {Location} from '@angular/common';
 import {FormBuilder, FormGroup} from '@angular/forms';
@@ -12,6 +12,8 @@ import {AuthService} from '../auth/auth.service';
   styleUrls: ['./create-fileupload.component.css']
 })
 export class CreateFileuploadComponent implements OnInit {
+  @Output()
+  fileUploaded: EventEmitter<FileModel> = new EventEmitter<FileModel>();
 
   // @Input() title: string;
   // @Input() subtitle: string;
@@ -71,7 +73,8 @@ export class CreateFileuploadComponent implements OnInit {
     this.httpClient.post<FileModel>(this.SERVER_URL, formData).subscribe(
       (res) => {
         this.file = res;
-        if (this.file){
+        if (this.file) {
+          this.fileUploaded.emit(res);
         this.activeModal.close();
         console.log(res);
       }else{

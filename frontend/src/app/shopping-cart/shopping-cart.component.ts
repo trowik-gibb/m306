@@ -9,6 +9,7 @@ import { FileService } from '../services/files.service'
 import { ShoppingCartService } from '../services/shopping-cart.service'
 import { HttpClient } from "@angular/common/http";
 import { Subscription } from 'rxjs';
+import { ToastrService } from "ngx-toastr";
 
 @Component({
   selector: 'shopping-cart',
@@ -18,7 +19,7 @@ import { Subscription } from 'rxjs';
 export class ShoppingCartComponent implements OnInit {
 
   subscription: Subscription;
-  files: Array<FileModel> = [];
+  files: Array<FileModel>;
 
   private PARKING_API = 'localhost:8080/allfiles';
 
@@ -26,7 +27,8 @@ export class ShoppingCartComponent implements OnInit {
     public modal2: NgbModal,
     private http: HttpClient,
     private fileService: FileService,
-    private shoppingCartService: ShoppingCartService
+    private shoppingCartService: ShoppingCartService,
+    private toastr: ToastrService
   ) {
   }
 
@@ -47,5 +49,14 @@ export class ShoppingCartComponent implements OnInit {
     return sum;
   }
 
+  getCartSize(): number {
+    let sum = 0;
+    this.files.map(file => sum += file.size);
+    return Math.ceil(sum / 1024);
+  }
+
+  download() {
+    this.toastr.info("This function has not yet been implemented.", "Warning");
+  }
 
 }

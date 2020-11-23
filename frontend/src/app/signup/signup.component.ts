@@ -4,6 +4,7 @@ import { FormBuilder, Validators, FormGroup } from "@angular/forms";
 
 import { SignUpData } from "../auth/models/sign-up-data.interface";
 import { AuthService } from "../auth/auth.service";
+import { ToastrService } from "ngx-toastr";
 
 @Component({
   selector: "signup",
@@ -22,7 +23,8 @@ export class SignupComponent {
   constructor(
     private router: Router,
     private fb: FormBuilder,
-    private authService: AuthService) { }
+    private authService: AuthService,
+    private toatr: ToastrService) { }
 
   signup() {
     (<any>Object).values(this.form.controls).forEach(control => {
@@ -33,6 +35,7 @@ export class SignupComponent {
         this.authService.signup(this.form.value).subscribe((data: any) => {
           this.authService.setToken(data.id);
           this.router.navigate(['home']);
+          this.toatr.success("You have signed up successfully.", "Welcome");
         });
       }
       else {

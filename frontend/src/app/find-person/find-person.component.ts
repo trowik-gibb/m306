@@ -1,10 +1,12 @@
-import {Component, Inject, Input, OnInit} from '@angular/core';
-import {Person} from '../models/person';
-import {FileModel} from "../models/file.interface";
-import {PersonService} from "../services/personservice";
-import {ShareService} from "../services/ShareService";
-import {MAT_DIALOG_DATA} from "@angular/material/dialog";
-import {AuthService} from "../auth/auth.service";
+import { Component, Inject, Input, OnInit } from '@angular/core';
+import { Person } from '../models/person';
+import { FileModel } from "../models/file.interface";
+import { PersonService } from "../services/personservice";
+import { ShareService } from "../services/ShareService";
+import { MAT_DIALOG_DATA } from "@angular/material/dialog";
+import { AuthService } from "../auth/auth.service";
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ToastrService } from "ngx-toastr";
 
 @Component({
   selector: 'app-find-person',
@@ -23,11 +25,14 @@ export class FindPersonComponent implements OnInit {
   chosenPersons: Array<Person> = [];
   choosenPerson: Person;
 
-  constructor(@Inject(AuthService) authService, @Inject(PersonService) personService, @Inject(ShareService) shareService, @Inject(MAT_DIALOG_DATA) data: FileModel) {
+  constructor(@Inject(AuthService) authService,
+    @Inject(PersonService) personService,
+    @Inject(ShareService) shareService,
+    public activeModal: NgbActiveModal,
+    private toastr: ToastrService) {
     this.personService = personService;
     this.shareService = shareService;
     this.authService = authService;
-    this.file = data;
   }
 
   ngOnInit(): void {
@@ -41,7 +46,11 @@ export class FindPersonComponent implements OnInit {
 
   public shareFile(): void {
     this.shareService.shareFile(this.file, this.choosenPerson).subscribe((value) => {
-      if (value) {
+      if (value === "error-already-shared") {
+        this.toastr.error("You have already shared the file with this person.", "Action failed");
+      }
+      else if (value) {
+        this.activeModal.close();
         console.log(value);
       }
     });
