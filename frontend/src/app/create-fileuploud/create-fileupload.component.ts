@@ -1,5 +1,5 @@
-import {Component, Inject, Input, OnInit} from '@angular/core';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import {Component, Inject, OnInit} from '@angular/core';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {Location} from '@angular/common';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {HttpClient} from '@angular/common/http';
@@ -13,14 +13,10 @@ import {AuthService} from '../auth/auth.service';
 })
 export class CreateFileuploadComponent implements OnInit {
 
-  // @Input() title: string;
-  // @Input() subtitle: string;
-  // @Input() confirmationText: string;
-  // @Input() btnConfirmLabel: string;
   public file: FileModel;
   public activeModal: NgbActiveModal;
   public authService: AuthService;
-  public state = false;
+  public state = true;
   public price: number;
   public owner: number;
 
@@ -46,19 +42,8 @@ export class CreateFileuploadComponent implements OnInit {
   }
 
 
-  handleSave(): void {
-    /*
-          this.parkingLotService.createParkingLot(submittedParkingLot).subscribe(
-            () => {
-              this.toastrService.success(this.translateService.instant('parking-lot.form.toaster.created'));
-            }, (response: HttpErrorResponse) => this.errors = response.error!.validationErrors as ValidationError[]
-          );
-     */
-  }
-
   navigateBack(): void {
     this.activeModal.close();
-    // this.location.back();
   }
 
   onSubmit(fileData: any): void {
@@ -71,10 +56,10 @@ export class CreateFileuploadComponent implements OnInit {
     this.httpClient.post<FileModel>(this.SERVER_URL, formData).subscribe(
       (res) => {
         this.file = res;
-        if (this.file){
-        this.activeModal.close();
-        console.log(res);
-      }else{
+        if (this.file) {
+          this.activeModal.close();
+          console.log(res);
+        } else {
           console.log('Deine Datei kann nicht hochgeladen werden');
         }
       },
@@ -90,10 +75,10 @@ export class CreateFileuploadComponent implements OnInit {
   }
 
   public setPublic(): void {
-   if (!this.state){
+    if (!this.state) {
       this.state = true;
-   }else{
-     this.state = false;
-   }
+    } else {
+      this.state = false;
+    }
   }
 }
