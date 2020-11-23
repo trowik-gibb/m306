@@ -10,21 +10,24 @@ import { ShoppingCartService } from '../../services/shopping-cart.service';
 })
 export class FileComponent {
   @Input() file: FileModel;
-  @Output() openOptionsM: EventEmitter<FileModel>;
+  //@Output() openOptionsM: EventEmitter<FileModel>;
 
   @Output()
   removedFromCart: EventEmitter<{}> = new EventEmitter<{}>();
 
+  showOptions = false;
+
   constructor(public authService: AuthService, private shoppingCartService: ShoppingCartService) {
-    this.openOptionsM = new EventEmitter();
+    //this.openOptionsM = new EventEmitter();
   }
 
   isOwn(ownerId: number): boolean {
     return this.authService.getUserId() === String(ownerId);
   }
-  public openOptions(): void {
-    this.openOptionsM.emit(this.file);
-  }
+  //public openOptions(): void {
+  //  this.openOptionsM.emit(this.file);
+  //}
+
   public addToCart(id: number): void {
     this.shoppingCartService.addFileToCart(id);
     console.log(this.shoppingCartService.getFileIds());

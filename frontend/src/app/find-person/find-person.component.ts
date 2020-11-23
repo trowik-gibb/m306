@@ -8,8 +8,8 @@ import {AuthService} from "../auth/auth.service";
 
 @Component({
   selector: 'app-find-person',
-  templateUrl: './find-person.component.html',
-  styleUrls: ['./find-person.component.css']
+  templateUrl: 'find-person.component.html',
+  styleUrls: ['find-person.component.css']
 })
 export class FindPersonComponent implements OnInit {
   @Input() file: FileModel;
