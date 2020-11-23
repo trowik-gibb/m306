@@ -69,12 +69,15 @@ export class CreateFileuploadComponent implements OnInit {
     formData.append('price', `${fileData.price}`);
     formData.append('owner', String(this.authService.getAuthenticatedUser()));
     formData.append('state', this.state ? '1' : '0');
-    this.httpClient.post<any>(this.SERVER_URL, formData).subscribe(
+    this.httpClient.post<FileModel>(this.SERVER_URL, formData).subscribe(
       (res) => {
-        if (res){
+        this.file = res;
+        if (this.file){
         this.activeModal.close();
         console.log(res);
-      }
+      }else{
+          console.log('Deine Datei kann nicht hochgeladen werden');
+        }
       },
       (err) => console.log(err)
     );
