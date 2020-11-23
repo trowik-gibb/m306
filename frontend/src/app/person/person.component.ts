@@ -15,7 +15,6 @@ export class PersonComponent implements OnInit {
   ngOnInit(): void {
   }
   public choose(person: Person): void{
-    debugger;
     this.choosen.emit(person);
   }
 
