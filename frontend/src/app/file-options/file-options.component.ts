@@ -27,12 +27,11 @@ export class FileOptionsComponent implements OnInit, OnChanges {
   constructor(private dialog: MatDialog, private fileService: FileService, private cartService: ShoppingCartService,
     private modalService: NgbModal,
     private toastr: ToastrService) {
-    //this.options = ['Edit File', 'Delete File']
   }
 
   ngOnChanges() {
     if (this.file) {
-      this.options = ['Delete File'];
+      this.options = ['Edit File', 'Delete File']
       if (!this.file.public) {
         this.options = [...this.options, 'Share File'];
       }
@@ -48,8 +47,12 @@ export class FileOptionsComponent implements OnInit, OnChanges {
       case 'Share File':
         this.openDialogFindPersonC();
         break;
+      case 'Edit File':
+        this.toastr.warning("This function has not yet been implemented.", "Warning");
+        break;
       case 'Delete File':
         this.deletFile(this.file);
+        break;
     }
   }
   public openDialogFindPersonC(): void {
@@ -60,8 +63,8 @@ export class FileOptionsComponent implements OnInit, OnChanges {
   private deletFile(file: FileModel): void {
     this.fileService.deleteFile(file.id).subscribe((value) => {
       const file$ = value;
-      this.cartService.removeFileFromCart(value.id);
-      if (file$.id) {
+      if (file$) {
+        this.cartService.removeFileFromCart(value.id);
         console.log('Datei gelöscht');
         this.toastr.success("File was deleted.", "Success")
       }

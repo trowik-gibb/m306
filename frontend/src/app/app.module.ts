@@ -11,7 +11,6 @@ import { AppComponent } from './app.component';
 import { StartPageComponent } from './start-page/start-page.component';
 import {NgbPaginationModule, NgbAlertModule} from '@ng-bootstrap/ng-bootstrap';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import { PageTwoComponent } from './page-two/page-two.component';
 import { GroupPageComponent } from './group-page/group-page.component';
 import { AuthService } from './auth/auth.service';
 import { AuthGuardService } from './auth/auth-guard.service';
@@ -45,7 +44,6 @@ const toastrOptions = {
     AppComponent,
     StartPageComponent,
     HomeComponent,
-    PageTwoComponent,
     GroupPageComponent,
     LoginComponent,
     SignupComponent,

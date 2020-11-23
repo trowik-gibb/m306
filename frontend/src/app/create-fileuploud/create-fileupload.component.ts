@@ -22,7 +22,7 @@ export class CreateFileuploadComponent implements OnInit {
   public file: FileModel;
   public activeModal: NgbActiveModal;
   public authService: AuthService;
-  public state = false;
+  public state = true;
   public price: number;
   public owner: number;
 

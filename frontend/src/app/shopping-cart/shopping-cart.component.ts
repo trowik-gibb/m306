@@ -56,7 +56,7 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   download() {
-    this.toastr.info("This function has not yet been implemented.", "Warning");
+    this.toastr.warning("This function has not yet been implemented.", "Warning");
   }
 
 }

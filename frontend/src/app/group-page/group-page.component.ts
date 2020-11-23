@@ -20,7 +20,7 @@ export class GroupPageComponent implements OnInit {
     //this.groupService.getAllGroups().subscribe((value) => {
     //  this.groups = value;
     //});
-    this.toastr.info("This component has not been fully implemented.", "Warning");
+    this.toastr.warning("This component has not been fully implemented.", "Warning");
   }
 
   loadModalGroupCreate(): void {
