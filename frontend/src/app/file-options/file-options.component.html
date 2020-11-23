@@ -1,5 +1,5 @@
 <mat-card>
-  <mat-card-content (click)="openDialogFindPersonC(option)" *ngFor="let option of options">
+  <mat-card-content (click)="dispatchAction(option)" *ngFor="let option of options">
     {{option}}
   </mat-card-content>
 </mat-card>
